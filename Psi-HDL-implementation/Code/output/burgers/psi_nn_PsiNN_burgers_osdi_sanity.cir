@@ -1,0 +1,15 @@
+* burgers PsiNN OSDI sanity
+Vin0 in0 0 0.3
+Vin1 in1 0 0.2
+Vdd vdd 0 1
+Vss vss 0 0
+N1 in0 in1 out0 vdd vss dut
+.model dut psi_nn_PsiNN_burgers()
+Rout out0 0 1e9
+.control
+pre_osdi C:/ngspice_work/burgers.osdi
+op
+print v(out0)
+quit
+.endc
+.end

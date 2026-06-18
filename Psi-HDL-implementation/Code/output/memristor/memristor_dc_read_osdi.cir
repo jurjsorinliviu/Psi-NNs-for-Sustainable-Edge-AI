@@ -1,0 +1,12 @@
+* Psi-HDL memristor OSDI validation (DC read)
+V1 a 0 0.2
+N1 a 0 memmod
+.model memmod memristor_pinn(R_on=1e3 R_off=1e5 alpha=2 tau=1e-3 V_set=0.8 V_reset=-0.6)
+.control
+pre_osdi C:/ngspice_work/memristor_pinn.osdi
+tran 1e-6 1e-3 uic
+wrdata C:/ngspice_work/mem_dc_read_out.txt i(v1) v(a)
+rusage all
+quit
+.endc
+.end
