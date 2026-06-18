@@ -1,0 +1,12 @@
+Metric,Real PVGIS,Markov Model,Difference,Diff %
+Overall Duty Cycle (%),27.43,39.47,-12.04,-30.5%
+Total Available Hours,2403.00,3458.00,-1055.00,-30.5%
+Mean Daily Hours,6.58,9.47,-2.89,-30.5%
+Std Daily Hours,4.10,1.25,+2.85,+227.3%
+Min Daily Hours,0.00,7.00,-7.00,-100.0%
+Max Daily Hours,13.00,11.00,+2.00,+18.2%
+Mean ON Run (hours),4.67,7.88,-3.21,-40.8%
+Max ON Run (hours),13.00,11.00,+2.00,+18.2%
+Mean OFF Run (hours),12.32,12.06,+0.26,+2.2%
+Max OFF Run (hours),71.00,17.00,+54.00,+317.6%
+Number of Interruptions,515.00,439.00,+76.00,+17.3%

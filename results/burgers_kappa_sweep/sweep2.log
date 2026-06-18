@@ -1,0 +1,119 @@
+C:\Users\jurjs\AppData\Roaming\Python\Python314\site-packages\torch\backends\__init__.py:42: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\Context.cpp:85.)
+  return self.getter()
+Device: cpu
+Seeds: [7270, 860, 5390, 5191, 5734, 6265, 466, 4426, 5578, 8322]
+Kappas: [0.0, 0.5, 1.0, 1.5, 2.0]
+
+============================================================
+  Seed 7270  (1/10)
+============================================================
+    init_digest CONFIRMED (220212b54389)
+    κ=0.0  mse=7.8505e-02  stored_passive=7.8005e-02  MISMATCH diff=5.00e-04  [23s]
+    κ=0.5  mse=7.7463e-02  [24s]
+    κ=1.0  mse=7.8854e-02  [25s]
+    κ=1.5  mse=7.6425e-02  [22s]
+    κ=2.0  mse=7.5959e-02  [20s]
+
+============================================================
+  Seed 860  (2/10)
+============================================================
+    init_digest CONFIRMED (2770cf3ead15)
+    κ=0.0  mse=8.0405e-02  stored_passive=8.0409e-02  MISMATCH diff=3.55e-06  [20s]
+    κ=0.5  mse=7.9269e-02  [21s]
+    κ=1.0  mse=7.8215e-02  [23s]
+    κ=1.5  mse=7.7783e-02  [23s]
+    κ=2.0  mse=7.5871e-02  [23s]
+
+============================================================
+  Seed 5390  (3/10)
+============================================================
+    init_digest CONFIRMED (c64de3cd1361)
+    κ=0.0  mse=7.6445e-02  stored_passive=7.6468e-02  MISMATCH diff=2.30e-05  [23s]
+    κ=0.5  mse=7.5883e-02  [23s]
+    κ=1.0  mse=7.5552e-02  [20s]
+    κ=1.5  mse=7.5126e-02  [21s]
+    κ=2.0  mse=7.4763e-02  [21s]
+
+============================================================
+  Seed 5191  (4/10)
+============================================================
+    init_digest CONFIRMED (099294d432d1)
+    κ=0.0  mse=7.8944e-02  stored_passive=7.8933e-02  MISMATCH diff=1.03e-05  [21s]
+    κ=0.5  mse=7.8625e-02  [21s]
+    κ=1.0  mse=7.7292e-02  [24s]
+    κ=1.5  mse=7.7898e-02  [25s]
+    κ=2.0  mse=7.5895e-02  [26s]
+
+============================================================
+  Seed 5734  (5/10)
+============================================================
+    init_digest CONFIRMED (e859b066471d)
+    κ=0.0  mse=7.6133e-02  stored_passive=7.6139e-02  MISMATCH diff=5.51e-06  [21s]
+    κ=0.5  mse=7.5563e-02  [22s]
+    κ=1.0  mse=7.4995e-02  [23s]
+    κ=1.5  mse=7.4510e-02  [26s]
+    κ=2.0  mse=7.4360e-02  [23s]
+
+============================================================
+  Seed 6265  (6/10)
+============================================================
+    init_digest CONFIRMED (5d173db0d572)
+    κ=0.0  mse=7.9945e-02  stored_passive=7.9945e-02  MISMATCH diff=5.22e-08  [20s]
+    κ=0.5  mse=7.9609e-02  [22s]
+    κ=1.0  mse=7.9275e-02  [22s]
+    κ=1.5  mse=7.8945e-02  [23s]
+    κ=2.0  mse=7.8621e-02  [25s]
+
+============================================================
+  Seed 466  (7/10)
+============================================================
+    init_digest CONFIRMED (c52f571d089c)
+    κ=0.0  mse=7.9000e-02  stored_passive=7.8900e-02  MISMATCH diff=1.01e-04  [24s]
+    κ=0.5  mse=7.8299e-02  [23s]
+    κ=1.0  mse=7.7698e-02  [22s]
+    κ=1.5  mse=7.7206e-02  [23s]
+    κ=2.0  mse=7.6060e-02  [22s]
+
+============================================================
+  Seed 4426  (8/10)
+============================================================
+    init_digest CONFIRMED (1c58d68652a6)
+    κ=0.0  mse=7.7097e-02  stored_passive=7.6819e-02  MISMATCH diff=2.78e-04  [21s]
+    κ=0.5  mse=7.7906e-02  [23s]
+    κ=1.0  mse=7.5835e-02  [25s]
+    κ=1.5  mse=7.5330e-02  [24s]
+    κ=2.0  mse=7.4914e-02  [26s]
+
+============================================================
+  Seed 5578  (9/10)
+============================================================
+    init_digest CONFIRMED (d46af07052a5)
+    κ=0.0  mse=7.6618e-02  stored_passive=7.6618e-02  MISMATCH diff=2.98e-08  [24s]
+    κ=0.5  mse=7.6171e-02  [22s]
+    κ=1.0  mse=7.5730e-02  [24s]
+    κ=1.5  mse=7.5308e-02  [21s]
+    κ=2.0  mse=7.4915e-02  [25s]
+
+============================================================
+  Seed 8322  (10/10)
+============================================================
+    init_digest CONFIRMED (ca34a245031c)
+    κ=0.0  mse=7.3765e-02  stored_passive=7.3765e-02  MISMATCH diff=3.73e-08  [25s]
+    κ=0.5  mse=7.3382e-02  [26s]
+    κ=1.0  mse=7.3006e-02  [26s]
+    κ=1.5  mse=7.2631e-02  [25s]
+    κ=2.0  mse=7.2267e-02  [22s]
+
+
+======================================================================
+  BURGERS κ-SWEEP  (Δ% vs continuous baseline, per-seed paired)
+======================================================================
+      κ     mean Δ%       CI lo       CI hi  resolved?
+----------------------------------------------------------------------
+    0.0        -8.6%       -10.9%        -6.4%  YES
+    0.5        -9.2%       -11.5%        -7.0%  YES
+    1.0        -9.8%       -12.5%        -7.3%  YES
+    1.5       -10.5%       -13.0%        -8.1%  YES
+    2.0       -11.4%       -14.2%        -8.7%  YES
+
+  Saved to C:\Users\jurjs\Desktop\PostDoc pmTUC\Papers ideas\Sustainable Edge AI paper\results\burgers_kappa_sweep\burgers_kappa_sweep.json

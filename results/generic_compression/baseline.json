@@ -1,0 +1,74 @@
+{
+  "problem": "burgers",
+  "reference": "finite-difference numerical solution (consistent with the -sin(pi x) IC)",
+  "metric": "rel_l2_pct = relative L2 error vs FD (%); antisymmetry = mean|f(x)+f(-x)|/mean|f| (0=odd in x)",
+  "psinn": {
+    "params": 1937,
+    "weight_bytes": 7748,
+    "rel_l2_pct": 5.001380443572998,
+    "antisymmetry": 0.0058548422530293465,
+    "note": "directly trained structured architecture (no distillation); evaluated artifact"
+  },
+  "generic_dense_mlp": {
+    "params": 7851,
+    "weight_bytes": 31404,
+    "rel_l2_pct": 30.187395095825195,
+    "antisymmetry": 0.14571057260036469
+  },
+  "generic_pruned": [
+    {
+      "sparsity": 0.5,
+      "nonzero_weights": 3825,
+      "weight_bytes": 15300,
+      "rel_l2_pct": 86.1759033203125,
+      "antisymmetry": 0.3551443815231323
+    },
+    {
+      "sparsity": 0.8,
+      "nonzero_weights": 1530,
+      "weight_bytes": 6120,
+      "rel_l2_pct": 76.34908294677734,
+      "antisymmetry": 0.1857033371925354
+    },
+    {
+      "sparsity": 0.9,
+      "nonzero_weights": 765,
+      "weight_bytes": 3060,
+      "rel_l2_pct": 82.9734115600586,
+      "antisymmetry": 0.17651595175266266
+    },
+    {
+      "sparsity": 0.95,
+      "nonzero_weights": 383,
+      "weight_bytes": 1532,
+      "rel_l2_pct": 62.8527717590332,
+      "antisymmetry": 0.2092084437608719
+    },
+    {
+      "sparsity": 0.99,
+      "nonzero_weights": 77,
+      "weight_bytes": 308,
+      "rel_l2_pct": 100.2015380859375,
+      "antisymmetry": 2.0
+    }
+  ],
+  "generic_int8": {
+    "params": 7851,
+    "weight_bytes": 7851,
+    "rel_l2_pct": 29.653236389160156,
+    "antisymmetry": 0.16461971402168274
+  },
+  "psinn_advantage": {
+    "size_x_smaller_than_dense": 4.1,
+    "accuracy_x_better": 6.0,
+    "symmetry": "preserved (0.006) vs not enforced (0.146)"
+  },
+  "clustering_tradeoff": {
+    "clusters": 12,
+    "rel_l2_pct": 17.6,
+    "antisymmetry": 0.265,
+    "note": "12-cluster reconstruction (eq. replace) of the directly trained net does NOT retain the full model's accuracy; a compact 12-cluster model at this accuracy requires the distillation-based clustering of Ref. [23], not used here"
+  },
+  "any_functional_pruned_config": false,
+  "note": "Psi-NN (structured, directly trained, 1937 params) and the 4x50 dense PINN (7851 params, matching Sec. IV.B.3) are trained identically on the same forward Burgers objective (physics+IC+BC) and scored against a finite-difference reference. The directly trained structured network is ~4.1x smaller than the dense PINN (7.6 KB vs 30.7 KB), ~6.0x more accurate (rel L2 5.0% vs 30.2%), and preserves the physical odd-in-x symmetry (0.006 vs 0.146) -- on the same training budget. Generic compression of the dense net never closes the gap (rel L2 >= 63% at every sparsity; pruning to structured scale collapses it toward a constant, antisymmetry -> 2.0). Aggressive post-training clustering of the structured net to a 12-cluster footprint does NOT retain that accuracy (see clustering_tradeoff); the compact 12-cluster model of Ref. [23] required distillation, not used here. Training is untuned per architecture; absolute errors would improve with per-model tuning, but the comparison holds the protocol fixed."
+}
