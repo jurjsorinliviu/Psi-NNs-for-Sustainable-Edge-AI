@@ -1,0 +1,12 @@
+Metric,Continuous,Passive,Active
+Final Loss,0.20571781694889069,0.20958344638347626,0.21750321984291077
+Training Time (s),38.79106521606445,22.287742614746094,20.18492031097412
+Active Steps,3000,1500,1500
+Duty Cycle (%),1.0,0.5,0.5
+Total Clusters,4,4,4
+Operations/Inference,2252,2252,2252
+TOPS Required,1.3512e-07,1.3512e-07,1.3512e-07
+Memory (KB),9.3125,9.3125,9.3125
+Power (mW),0.07683350400000001,0.07683350400000001,0.07683350400000001
+Top Platform,Jetson Orin Nano,Jetson Orin Nano,Jetson Orin Nano
+Platform Cost ($),219,219,219
