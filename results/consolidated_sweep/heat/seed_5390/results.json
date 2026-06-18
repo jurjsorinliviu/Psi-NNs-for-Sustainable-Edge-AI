@@ -1,0 +1,43 @@
+{
+  "continuous": {
+    "final_loss": 0.0016411291435360909,
+    "train_time": 57.40594673156738,
+    "accuracy": {
+      "mse": 6.836594548076391e-05,
+      "mae": 0.007187044247984886
+    },
+    "duty_cycle": 1.0,
+    "verification": {
+      "initial_state_digest": "2a9908499fe40128721d04342131c6362142f6fb7d4841f9b3f9a01c79a8df7e",
+      "evaluation_digest": "7b1e7d2777b3a09fb68ddb22d1a6c39ea077edd41553c66017e8d173bc1a04f6"
+    }
+  },
+  "passive": {
+    "final_loss": 0.012171318754553795,
+    "train_time": 29.707362174987793,
+    "accuracy": {
+      "mse": 0.00016005696670617908,
+      "mae": 0.011087981052696705
+    },
+    "duty_cycle": 0.5,
+    "verification": {
+      "initial_state_digest": "2a9908499fe40128721d04342131c6362142f6fb7d4841f9b3f9a01c79a8df7e",
+      "evaluation_digest": "7b1e7d2777b3a09fb68ddb22d1a6c39ea077edd41553c66017e8d173bc1a04f6",
+      "power_transition_digest": "a829c08f31112a19c545e5402440396d929816541039151901ecf32d5a9cc6f3"
+    }
+  },
+  "active": {
+    "final_loss": 0.02919420786201954,
+    "train_time": 29.420329570770264,
+    "accuracy": {
+      "mse": 0.0001584161218488589,
+      "mae": 0.010857422836124897
+    },
+    "duty_cycle": 0.5,
+    "verification": {
+      "initial_state_digest": "2a9908499fe40128721d04342131c6362142f6fb7d4841f9b3f9a01c79a8df7e",
+      "evaluation_digest": "7b1e7d2777b3a09fb68ddb22d1a6c39ea077edd41553c66017e8d173bc1a04f6",
+      "power_transition_digest": "a829c08f31112a19c545e5402440396d929816541039151901ecf32d5a9cc6f3"
+    }
+  }
+}
