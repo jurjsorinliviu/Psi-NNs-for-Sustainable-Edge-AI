@@ -1,0 +1,21 @@
+{
+  "timestamp": "20251201_143906",
+  "test_name": "manuscript_config",
+  "epochs": 6000,
+  "collocation_points": 1000,
+  "architecture": [
+    50,
+    50,
+    50,
+    50
+  ],
+  "gpu_name": "NVIDIA GeForce RTX 4090",
+  "mean_power_w": 57.13987654320987,
+  "max_power_w": 91.77,
+  "min_power_w": 50.13,
+  "std_power_w": 13.880101352836201,
+  "samples": 81,
+  "duration_sec": 43.60786151885986,
+  "manuscript_claim_w": 250,
+  "discrepancy_percent": 77.1
+}

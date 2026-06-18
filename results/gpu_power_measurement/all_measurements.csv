@@ -1,0 +1,2 @@
+timestamp,test_name,epochs,collocation_points,architecture,mean_power_w,max_power_w,min_power_w,std_power_w,samples,manuscript_claim_w,discrepancy_percent
+20251201_143906,manuscript_config,6000,1000,50->50->50->50,57.1,91.8,50.1,13.9,81,250,77.1

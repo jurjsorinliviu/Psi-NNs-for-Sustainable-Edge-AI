@@ -1,0 +1,87 @@
+{
+  "experiment_date": "2025-12-01T00:30:44.980460",
+  "config": {
+    "latitude": 50.8278,
+    "longitude": 12.9214,
+    "location_name": "Chemnitz, Germany",
+    "year": 2022,
+    "peak_solar_power_w": 300.0,
+    "gpu_power_w": 250.0,
+    "panel_efficiency": 0.2,
+    "panel_area_m2": 2.0,
+    "markov_p_clear_to_cloudy": 0.15,
+    "markov_p_cloudy_to_clear": 0.25,
+    "cloudy_attenuation": 0.3,
+    "epochs": 3000,
+    "learning_rate": 0.001,
+    "reg_weight": 0.0001,
+    "n_seeds": 3,
+    "results_dir": "../results/pvgis_validation"
+  },
+  "location": "Chemnitz, Germany",
+  "data_source": "PVGIS",
+  "duty_cycle_comparison": {
+    "real_data": {
+      "overall_duty_cycle": 0.003310502283105023,
+      "total_hours_available": "29",
+      "total_hours": 8760,
+      "mean_daily_hours": 0.07945205479452055,
+      "std_daily_hours": 0.31707520568064235,
+      "min_daily_hours": "0",
+      "max_daily_hours": "3",
+      "mean_on_run_hours": 1.16,
+      "max_on_run_hours": "3",
+      "mean_off_run_hours": 188.48,
+      "max_off_run_hours": "3492",
+      "num_interruptions": 25
+    },
+    "markov_model": {
+      "overall_duty_cycle": 0.1291095890410959,
+      "total_hours_available": "1131",
+      "total_hours": 8760,
+      "mean_daily_hours": 3.0986301369863014,
+      "std_daily_hours": 1.7426552839112548,
+      "min_daily_hours": "0",
+      "max_daily_hours": "5",
+      "mean_on_run_hours": 3.1329639889196677,
+      "max_on_run_hours": "5",
+      "mean_off_run_hours": 21.102493074792243,
+      "max_off_run_hours": "70",
+      "num_interruptions": 361
+    }
+  },
+  "training_results": {
+    "continuous": {
+      "mean_loss": 0.23914211988449097,
+      "std_loss": 0.016250556729319732,
+      "ci95_loss": 0.018389236072221905,
+      "mean_duty_cycle": 1.0,
+      "min_loss": 0.22024554014205933,
+      "max_loss": 0.25991782546043396
+    },
+    "real_solar": {
+      "mean_loss": 5.106771310170491,
+      "std_loss": 0.48536052497011645,
+      "ci95_loss": 0.549237138301209,
+      "mean_duty_cycle": 0.004333333333333333,
+      "min_loss": 4.468057632446289,
+      "max_loss": 5.643834114074707,
+      "degradation_pct": 2035.4545625994845
+    },
+    "markov_solar": {
+      "mean_loss": 0.5004983345667521,
+      "std_loss": 0.0200984185677222,
+      "ci95_loss": 0.022743501645905963,
+      "mean_duty_cycle": 0.133,
+      "min_loss": 0.4764336347579956,
+      "max_loss": 0.5256298184394836,
+      "degradation_pct": 109.28907664132939
+    }
+  },
+  "key_findings": {
+    "real_vs_markov_duty_cycle_diff": 0.12579908675799087,
+    "real_degradation_pct": 2035.4545625994845,
+    "markov_degradation_pct": 109.28907664132939,
+    "model_validity": "NEEDS_REVIEW"
+  }
+}
