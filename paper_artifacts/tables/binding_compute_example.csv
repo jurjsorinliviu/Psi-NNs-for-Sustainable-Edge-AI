@@ -1,0 +1,3 @@
+Case,OPS/inf,TOPS_safe,Mem(KB),Binding=compute?,Recommended,Util %
+sub-kiloparameter [2,40,40,2] @10Hz,2082,2.498e-08,7.5,no,Nordic nRF52840,0.00
+multi-physics [3,256,256,256,128,4] twin 128x128@100Hz,168708,4.146e-01,652.0,YES,TI AM62A,20.73

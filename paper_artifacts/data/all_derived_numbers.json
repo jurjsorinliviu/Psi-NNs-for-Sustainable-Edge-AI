@@ -1,0 +1,392 @@
+{
+  "table5": [
+    {
+      "problem": "Burgers",
+      "pde_type": "Parabolic (nonlinear)",
+      "cont_mse": 0.08500322252511978,
+      "pass_cont_pct": -8.50251971140181,
+      "pass_cont_lo": -10.314955586840464,
+      "pass_cont_hi": -6.648595893289028,
+      "pass_cont_res": "resolved",
+      "act_pass_pct": -2.973938710327594,
+      "act_pass_lo": -3.7288675257985284,
+      "act_pass_hi": -2.352995132737067,
+      "act_pass_res": "resolved",
+      "bte": "0 (identity)"
+    },
+    {
+      "problem": "Laplace",
+      "pde_type": "Elliptic (steady-state)",
+      "cont_mse": 0.00022016676789503886,
+      "pass_cont_pct": 7.516256461409373,
+      "pass_cont_lo": -6.500666708339603,
+      "pass_cont_hi": 20.153133782313876,
+      "pass_cont_res": "unresolved",
+      "act_pass_pct": null,
+      "act_pass_res": "earlier impl.",
+      "bte": "mismatch (linear-ramp)"
+    },
+    {
+      "problem": "Allen-Cahn",
+      "pde_type": "Reaction-diffusion",
+      "cont_mse": 0.0003579763411835302,
+      "pass_cont_pct": 121.22818200295696,
+      "pass_cont_lo": 72.20953784910995,
+      "pass_cont_hi": 169.46417230071725,
+      "pass_cont_res": "resolved",
+      "act_pass_pct": 55.279812614979605,
+      "act_pass_lo": 24.939713925777028,
+      "act_pass_hi": 88.84570645071344,
+      "act_pass_res": "resolved",
+      "bte": "0 (identity)"
+    },
+    {
+      "problem": "Heat",
+      "pde_type": "Parabolic",
+      "cont_mse": 8.790144802333089e-05,
+      "pass_cont_pct": 155.9466428225378,
+      "pass_cont_lo": 98.2750498292923,
+      "pass_cont_hi": 214.76175563005992,
+      "pass_cont_res": "resolved",
+      "act_pass_pct": 24.295175228423147,
+      "act_pass_lo": 2.412464266374471,
+      "act_pass_hi": 64.97924699852024,
+      "act_pass_res": "resolved",
+      "bte": "0 (identity)"
+    },
+    {
+      "problem": "Wave",
+      "pde_type": "Hyperbolic (2nd-order)",
+      "cont_mse": 6.958029380257357e-05,
+      "pass_cont_pct": 691.2794011313681,
+      "pass_cont_lo": 193.06230641808733,
+      "pass_cont_hi": 1462.2462681796421,
+      "pass_cont_res": "resolved",
+      "act_pass_pct": 619.7552897870542,
+      "act_pass_lo": -15.519289414821099,
+      "act_pass_hi": 1638.7808925747122,
+      "act_pass_res": "unresolved",
+      "bte": "0 (identity)"
+    },
+    {
+      "problem": "Memristor",
+      "pde_type": "ODE (device physics)",
+      "cont_mse": 8.15805276361004e-08,
+      "pass_cont_pct": 768.833344365918,
+      "pass_cont_lo": 418.7139092758148,
+      "pass_cont_hi": 1148.6527276025947,
+      "pass_cont_res": "resolved",
+      "act_pass_pct": null,
+      "act_pass_res": "earlier impl.",
+      "bte": "mismatch (linear-ramp)"
+    },
+    {
+      "problem": "Advection",
+      "pde_type": "Hyperbolic (1st-order)",
+      "cont_mse": 0.00012230847605678718,
+      "pass_cont_pct": 861.4721847490207,
+      "pass_cont_lo": 292.83459280446186,
+      "pass_cont_hi": 1615.4205423070512,
+      "pass_cont_res": "resolved",
+      "act_pass_pct": 111.76625750824765,
+      "act_pass_lo": 44.79178104971105,
+      "act_pass_hi": 186.7274043293298,
+      "act_pass_res": "resolved",
+      "bte": "0 (identity)"
+    }
+  ],
+  "table3": [
+    {
+      "problem": "Burgers",
+      "DtoC_pct": -8.22533943624707,
+      "DtoC_lo": -10.450268344959737,
+      "DtoC_hi": -6.073225355652285,
+      "CtoB_pp": -2.9758775339878407,
+      "BtoE_pp": 0.0,
+      "DtoE_pct": -11.20121697023491,
+      "DtoE_lo": -13.478213423330427,
+      "DtoE_hi": -8.97493813732024,
+      "residual_pp": 1.7763568394002505e-15
+    },
+    {
+      "problem": "Allen-Cahn",
+      "DtoC_pct": 75.79243135155494,
+      "DtoC_lo": 32.911595590344064,
+      "DtoC_hi": 121.95049010821772,
+      "CtoB_pp": 161.4156096633149,
+      "BtoE_pp": 0.0,
+      "DtoE_pct": 237.20804101486982,
+      "DtoE_lo": 155.59117926790321,
+      "DtoE_hi": 310.4761371224873,
+      "residual_pp": 2.842170943040401e-14
+    },
+    {
+      "problem": "Heat",
+      "DtoC_pct": 20.5623042063111,
+      "DtoC_lo": 2.9649236363077542,
+      "DtoC_hi": 39.652768944254525,
+      "CtoB_pp": 205.62548298749098,
+      "BtoE_pp": 0.0,
+      "DtoE_pct": 226.18778719380202,
+      "DtoE_lo": 114.94079745733082,
+      "DtoE_hi": 373.8449892817738,
+      "residual_pp": 5.684341886080802e-14
+    },
+    {
+      "problem": "Wave",
+      "DtoC_pct": 142.97066183203808,
+      "DtoC_lo": 56.75791007027014,
+      "DtoC_hi": 237.11523240371372,
+      "CtoB_pp": 3814.739969799431,
+      "BtoE_pp": 0.0,
+      "DtoE_pct": 3957.710631631469,
+      "DtoE_lo": 174.4718586821236,
+      "DtoE_hi": 10435.544210550052,
+      "residual_pp": 0.0
+    },
+    {
+      "problem": "Advection",
+      "DtoC_pct": 178.7051201797184,
+      "DtoC_lo": 60.27782628124484,
+      "DtoC_hi": 334.6413906363252,
+      "CtoB_pp": 1297.0046348681815,
+      "BtoE_pp": 0.0,
+      "DtoE_pct": 1475.7097550478998,
+      "DtoE_lo": 657.6844223185777,
+      "DtoE_hi": 2369.880783008562,
+      "residual_pp": 0.0
+    }
+  ],
+  "table4": [
+    {
+      "problem": "Burgers",
+      "pde_type": "Parabolic (nonlinear)",
+      "CtoB_pct": -3.2353178581230364,
+      "CtoB_lo": -4.393979219574641,
+      "CtoB_hi": -2.2048506806892623,
+      "res": "resolved",
+      "note": ""
+    },
+    {
+      "problem": "Laplace",
+      "pde_type": "Elliptic (steady-state)",
+      "CtoB_pct": 41.52859691584966,
+      "CtoB_lo": 12.005192106639695,
+      "CtoB_hi": 78.995245103525,
+      "res": "resolved",
+      "note": "earlier impl. (linear-ramp)"
+    },
+    {
+      "problem": "Allen-Cahn",
+      "pde_type": "Reaction-diffusion",
+      "CtoB_pct": 97.59647288278943,
+      "CtoB_lo": 66.56514342964743,
+      "CtoB_hi": 128.74940943966612,
+      "res": "resolved",
+      "note": ""
+    },
+    {
+      "problem": "Heat",
+      "pde_type": "Parabolic",
+      "CtoB_pct": 176.800966646706,
+      "CtoB_lo": 85.16219001211086,
+      "CtoB_hi": 304.71493470534057,
+      "res": "resolved",
+      "note": ""
+    },
+    {
+      "problem": "Wave",
+      "pde_type": "Hyperbolic (2nd-order)",
+      "CtoB_pct": 3474.4097624536985,
+      "CtoB_lo": 29.582820207396566,
+      "CtoB_hi": 9676.963602865095,
+      "res": "resolved",
+      "note": ""
+    },
+    {
+      "problem": "Memristor",
+      "pde_type": "ODE (device physics)",
+      "CtoB_pct": 306.4218109322737,
+      "CtoB_lo": -69.26050957990911,
+      "CtoB_hi": 714.4120815960276,
+      "res": "unresolved",
+      "note": "earlier impl. (linear-ramp)"
+    },
+    {
+      "problem": "Advection",
+      "pde_type": "Hyperbolic (1st-order)",
+      "CtoB_pct": 620.0191625730798,
+      "CtoB_lo": 239.2380757291457,
+      "CtoB_hi": 1118.2342378924639,
+      "res": "resolved",
+      "note": ""
+    }
+  ],
+  "kappa_sweep": [
+    {
+      "kappa": 0.0,
+      "pct": -8.50251971140181,
+      "lo": -10.314955586840464,
+      "hi": -6.648595893289028,
+      "res": "resolved"
+    },
+    {
+      "kappa": 0.5,
+      "pct": -9.052991006447117,
+      "lo": -10.867855456499981,
+      "hi": -7.251912015077535,
+      "res": "resolved"
+    },
+    {
+      "kappa": 1.0,
+      "pct": -9.70644664256303,
+      "lo": -11.871546601271268,
+      "hi": -7.540750848501614,
+      "res": "resolved"
+    },
+    {
+      "kappa": 1.5,
+      "pct": -10.33980838235791,
+      "lo": -12.297445477241506,
+      "hi": -8.378912825162677,
+      "res": "resolved"
+    },
+    {
+      "kappa": 2.0,
+      "pct": -11.20121697023491,
+      "lo": -13.478213423330427,
+      "hi": -8.97493813732024,
+      "res": "resolved"
+    }
+  ],
+  "carbon": {
+    "baseline_grid_jetson": {
+      "training_kg": 0.35624999999999996,
+      "deployment_kg": 208.04999999999998,
+      "embodied_kg": 30.0,
+      "total_kg": 238.40624999999997
+    },
+    "rightsized_solar_nrf52840": {
+      "training_kg": 0.036000000000000004,
+      "deployment_kg": 0.312075,
+      "embodied_kg": 5.0,
+      "total_kg": 5.348075
+    },
+    "per_device_saving_kg": 233.05817499999998,
+    "reduction_factor": 44.57795561954535,
+    "solar_share_of_saving_pct": 0.13741204315188685
+  },
+  "binding_compute": [
+    {
+      "case": "sub-kiloparameter [2,40,40,2] @10Hz",
+      "ops_per_inf": 2082,
+      "tops_safe": 2.4984e-08,
+      "mem_total_kb": 7.515625,
+      "binding_is_compute": false,
+      "recommended": "Nordic nRF52840",
+      "utilization_pct": 9.609230769230771e-05,
+      "platforms": [
+        {
+          "name": "Nordic nRF52840",
+          "compute_ok": true,
+          "memory_ok": true,
+          "power_ok": true,
+          "feasible": true
+        },
+        {
+          "name": "STM32H7",
+          "compute_ok": true,
+          "memory_ok": true,
+          "power_ok": true,
+          "feasible": true
+        },
+        {
+          "name": "TI AM62A",
+          "compute_ok": true,
+          "memory_ok": true,
+          "power_ok": false,
+          "feasible": false
+        },
+        {
+          "name": "TI TDA4VM",
+          "compute_ok": true,
+          "memory_ok": true,
+          "power_ok": false,
+          "feasible": false
+        },
+        {
+          "name": "Hailo-8",
+          "compute_ok": true,
+          "memory_ok": true,
+          "power_ok": false,
+          "feasible": false
+        },
+        {
+          "name": "Jetson Orin Nano",
+          "compute_ok": true,
+          "memory_ok": true,
+          "power_ok": false,
+          "feasible": false
+        }
+      ]
+    },
+    {
+      "case": "multi-physics [3,256,256,256,128,4] twin 128x128@100Hz",
+      "ops_per_inf": 168708,
+      "tops_safe": 0.4146167808,
+      "mem_total_kb": 652.03125,
+      "binding_is_compute": true,
+      "recommended": "TI AM62A",
+      "utilization_pct": 20.73083904,
+      "platforms": [
+        {
+          "name": "Nordic nRF52840",
+          "compute_ok": false,
+          "memory_ok": false,
+          "power_ok": true,
+          "feasible": false
+        },
+        {
+          "name": "STM32H7",
+          "compute_ok": false,
+          "memory_ok": false,
+          "power_ok": true,
+          "feasible": false
+        },
+        {
+          "name": "TI AM62A",
+          "compute_ok": true,
+          "memory_ok": true,
+          "power_ok": true,
+          "feasible": true
+        },
+        {
+          "name": "TI TDA4VM",
+          "compute_ok": true,
+          "memory_ok": true,
+          "power_ok": true,
+          "feasible": true
+        },
+        {
+          "name": "Hailo-8",
+          "compute_ok": true,
+          "memory_ok": true,
+          "power_ok": true,
+          "feasible": true
+        },
+        {
+          "name": "Jetson Orin Nano",
+          "compute_ok": true,
+          "memory_ok": true,
+          "power_ok": false,
+          "feasible": false
+        }
+      ]
+    }
+  ],
+  "bootstrap": {
+    "n_boot": 10000,
+    "seed": 42,
+    "estimator": "mean of per-seed ratios, 95% percentile CI"
+  }
+}

@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\caption{Structured Architecture vs. Generic Compression (Burgers)}
+\label{tab:compress}
+\begin{tabular}{lrrll}
+\hline
+Approach & Distinct/Nonzero params & Weight memory & Rel. L2 vs FD (%) & Antisymmetry residual & Symmetry preserved \\
+\hline
+Psi-NN (structured, directly trained) & 1937 & 7.6 KB & 5.0 & 0.006 & yes \\
+Generic dense PINN (4x50) & 7851 & 30.7 KB & 30.2 & 0.146 & no \\
+  + magnitude prune 50% & 3825 & 14.9 KB & 86.2 & 0.355 & no \\
+  + magnitude prune 80% & 1530 & 6.0 KB & 76.3 & 0.186 & no \\
+  + magnitude prune 90% & 765 & 3.0 KB & 83.0 & 0.177 & no \\
+  + magnitude prune 95% & 383 & 1.5 KB & 62.9 & 0.209 & no \\
+  + magnitude prune 99% & 77 & 308 B & 100.2 & 2.000 & no \\
+  + INT8 quantization & 7851 & 7.7 KB (8-bit) & 29.7 & 0.165 & no \\
+\hline
+\end{tabular}
+\end{table}

@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\centering
+\caption{Seven-Problem Paired Results (Own-Denominator)}
+\label{tab:sevenprob}
+\begin{tabular}{llrlllll}
+\hline
+Problem & PDE Type & Cont MSE & Pass-Cont % & Res & Act-Pass % & Res & B->E \\
+\hline
+Burgers & Parabolic (nonlinear) & 8.50e-02 & -8.5 [-10.3,-6.6] & resolved & -3.0 [-3.7,-2.4] & resolved & 0 (identity) \\
+Laplace & Elliptic (steady-state) & 2.20e-04 & 7.5 [-6.5,20.2] & unresolved & (earlier impl.) & earlier impl. & mismatch (linear-ramp) \\
+Allen-Cahn & Reaction-diffusion & 3.58e-04 & 121.2 [72.2,169.5] & resolved & 55.3 [24.9,88.8] & resolved & 0 (identity) \\
+Heat & Parabolic & 8.79e-05 & 155.9 [98.3,214.8] & resolved & 24.3 [2.4,65.0] & resolved & 0 (identity) \\
+Wave & Hyperbolic (2nd-order) & 6.96e-05 & 691.3 [193.1,1462.2] & resolved & 619.8 [-15.5,1638.8] & unresolved & 0 (identity) \\
+Memristor & ODE (device physics) & 8.16e-08 & 768.8 [418.7,1148.7] & resolved & (earlier impl.) & earlier impl. & mismatch (linear-ramp) \\
+Advection & Hyperbolic (1st-order) & 1.22e-04 & 861.5 [292.8,1615.4] & resolved & 111.8 [44.8,186.7] & resolved & 0 (identity) \\
+\hline
+\end{tabular}
+\end{table}

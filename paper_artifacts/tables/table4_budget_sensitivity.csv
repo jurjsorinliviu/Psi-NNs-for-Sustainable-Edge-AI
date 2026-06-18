@@ -1,0 +1,8 @@
+Problem,PDE Type,C->B %,95% CI,Resolved,Note
+Burgers,Parabolic (nonlinear),-3.2,[-4.4,-2.2],resolved,
+Laplace,Elliptic (steady-state),41.5,[12.0,79.0],resolved,earlier impl. (linear-ramp)
+Allen-Cahn,Reaction-diffusion,97.6,[66.6,128.7],resolved,
+Heat,Parabolic,176.8,[85.2,304.7],resolved,
+Wave,Hyperbolic (2nd-order),3474.4,[29.6,9677.0],resolved,
+Memristor,ODE (device physics),306.4,[-69.3,714.4],unresolved,earlier impl. (linear-ramp)
+Advection,Hyperbolic (1st-order),620.0,[239.2,1118.2],resolved,

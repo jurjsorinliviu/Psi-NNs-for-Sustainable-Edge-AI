@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sustainable Edge AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Times New Roman',Times,serif;background:#fff;padding:32px;}
+.fig{max-width:860px;margin:0 auto;background:#fff;padding:32px;border:1px solid #ccc;box-shadow:0 4px 24px rgba(0,0,0,.13);}
+
+.page-title{text-align:center;margin-bottom:24px;}
+.page-title h1{font-family:Arial,sans-serif;font-size:1.35rem;font-weight:800;color:#1e293b;margin-bottom:4px;}
+.page-title p{font-family:Arial,sans-serif;font-size:.88rem;color:#64748b;font-style:italic;}
+
+.input-box{border:2px dashed #94a3b8;background:#f8fafc;border-radius:8px;padding:14px 24px;text-align:center;width:60%;margin:0 auto;}
+.input-box .title{font-family:Arial,sans-serif;font-weight:700;font-size:1rem;color:#1e293b;}
+.input-box .sub{font-family:Arial,sans-serif;color:#64748b;font-style:italic;font-size:.88rem;}
+
+.arrow-wrap{display:flex;flex-direction:column;align-items:center;height:36px;}
+.arrow-line{flex:1;width:2px;background:#334155;}
+.arrow-head{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid #334155;}
+
+.stage{border:2px solid #1e293b;}
+.stage-header{background:#1e293b;color:#fff;padding:8px 14px;text-align:center;}
+.stage-header h3{font-family:Arial,sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.05em;text-transform:uppercase;}
+.stage-header .ref{font-family:Arial,sans-serif;font-size:.72rem;color:#cbd5e1;margin-top:2px;}
+.stage-body{padding:16px;}
+.stage-footer{background:#f1f5f9;border-top:1px solid #cbd5e1;padding:10px;text-align:center;font-size:.85rem;}
+
+.box{background:#fff;border:2px solid #475569;padding:12px;}
+.box-title{font-family:Arial,sans-serif;font-weight:700;color:#0f172a;border-bottom:1px solid #e2e8f0;padding-bottom:5px;margin-bottom:8px;text-align:center;font-size:.88rem;}
+.box ul{padding-left:16px;font-family:Arial,sans-serif;font-size:.77rem;color:#334155;line-height:1.75;}
+
+.row2{display:flex;align-items:stretch;}
+.row2 .box{flex:1;}
+.h-arrow{display:flex;align-items:center;flex-shrink:0;padding:0 8px;}
+.h-arrow-line{width:28px;height:2px;background:#334155;}
+.h-arrow-head{width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:8px solid #334155;}
+
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+.spec-box{border:1px solid #cbd5e1;background:#f8fafc;padding:10px;text-align:center;}
+.spec-box .s-title{font-family:Arial,sans-serif;font-weight:700;font-size:.78rem;margin-bottom:5px;}
+.spec-box .s-eq{font-family:monospace;font-size:.82rem;font-weight:700;color:#1e293b;margin-bottom:4px;}
+.spec-box .s-sub{font-size:.72rem;color:#64748b;font-family:Arial,sans-serif;}
+
+.platform-bar{border:1px solid #94a3b8;border-radius:4px;background:#f1f5f9;padding:10px;}
+.platform-bar .pb-title{font-family:Arial,sans-serif;font-weight:700;color:#1e293b;font-size:.88rem;text-align:center;margin-bottom:8px;}
+.plat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.plat-item{background:#fff;border:1px solid #94a3b8;border-radius:4px;padding:8px;text-align:center;}
+.plat-item .pi-name{font-family:Arial,sans-serif;font-size:.78rem;font-weight:600;margin-bottom:3px;}
+.pi-green{color:#15803d;}
+.pi-blue{color:#1d4ed8;}
+.pi-red{color:#b91c1c;}
+.plat-item .pi-sub{font-family:Arial,sans-serif;font-size:.7rem;color:#64748b;}
+
+.solar-banner{background:#fefce8;border:1px solid #facc15;border-radius:4px;padding:10px 14px;margin-bottom:12px;}
+.solar-title{font-family:Arial,sans-serif;font-weight:600;text-align:center;color:#1e293b;font-size:.85rem;margin-bottom:8px;}
+.solar-eq{text-align:center;font-family:Arial,sans-serif;font-size:.9rem;color:#1e293b;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 1px;}
+.frac .num{border-bottom:1.5px solid #1e293b;padding:0 3px;font-size:.82rem;line-height:1.4;}
+.frac .den{padding:0 3px;font-size:.82rem;line-height:1.4;}
+.solar-note{text-align:center;font-family:Arial,sans-serif;font-size:.7rem;color:#64748b;}
+
+.grid3r{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;}
+.regime{border:2px solid #475569;padding:10px;}
+.regime .r-title{font-family:Arial,sans-serif;font-weight:700;font-size:.82rem;border-bottom:1px solid #e2e8f0;margin-bottom:6px;padding-bottom:4px;text-align:center;}
+.regime .r-items{font-family:Arial,sans-serif;font-size:.77rem;color:#374151;line-height:1.75;}
+.r1{background:#f8fafc;} .r1 .r-title{color:#374151;}
+.r2{background:#f0fdf4;border-color:#86efac;} .r2 .r-title{color:#166534;}
+.r3{background:#fff1f2;border-color:#fca5a5;} .r3 .r-title{color:#991b1b;}
+
+.val-box{border:1px solid #93c5fd;background:#dbeafe;border-radius:4px;padding:10px;}
+.val-title{font-family:Arial,sans-serif;font-weight:700;color:#1e40af;text-align:center;margin-bottom:6px;font-size:.85rem;}
+.val-classes{font-family:Arial,sans-serif;font-size:.78rem;color:#374151;text-align:center;line-height:1.9;}
+.va{font-weight:700;color:#15803d;}
+.vb{font-weight:700;color:#dc2626;}
+.vc{font-weight:700;color:#b45309;}
+
+.out-card{background:#1e293b;color:#fff;border-radius:4px;padding:20px;}
+.out-card .oc-title{font-family:Arial,sans-serif;font-weight:700;font-size:1.05rem;text-align:center;border-bottom:1px solid #475569;padding-bottom:10px;margin-bottom:14px;}
+.out-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.out-item{background:#334155;border-radius:4px;padding:9px 11px;font-family:Arial,sans-serif;font-size:.82rem;}
+.out-item .oi-sub{color:#94a3b8;font-size:.71rem;display:block;margin-top:2px;}
+
+.fig-caption{text-align:center;margin-top:20px;font-weight:700;font-size:.88rem;color:#0f172a;}
+
+@media(max-width:600px){
+  .out-grid,.grid3,.plat-grid,.grid3r{grid-template-columns:1fr;}
+  .row2{flex-direction:column;}
+  .h-arrow{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="fig">
+
+  <div class="input-box">
+    <div class="title">INPUT: Physical System</div>
+    <div class="sub">PDEs, ODEs, Device Physics Equations</div>
+  </div>
+
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+  <!-- STAGE 1 -->
+  <div class="stage">
+    <div class="stage-header">
+      <h3>Stage 1: &#936;-HDL Pipeline</h3>
+      <div class="ref">Section III.A</div>
+    </div>
+    <div class="stage-body">
+      <div class="row2">
+        <div class="box">
+          <div class="box-title">1. Structured Network Training</div>
+          <ul>
+            <li>Forward physics + IC/BC (PDE surrogates)</li>
+            <li>Data + physics (device models)</li>
+            <li>Direct training, no distillation</li>
+          </ul>
+        </div>
+        <div class="h-arrow"><div class="h-arrow-line"></div><div class="h-arrow-head"></div></div>
+        <div class="box">
+          <div class="box-title">2. Clustering &amp; Structure Extraction</div>
+          <ul>
+            <li>Hierarchical agglomerative clustering (HAC)</li>
+            <li>Relation matrices (parameter sharing + sign)</li>
+            <li>Compact cluster-center representation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="stage-footer">
+      <strong>OUTPUT 1:</strong> Cluster Centers (&#956;<sub>k</sub><sup>&#8467;</sup>) &amp; Relation Matrices (R<sup>&#8467;</sup>)
+      <div style="font-size:.77rem;font-weight:700;color:#475569;margin-top:4px;">~4&#215; smaller than dense PINN baseline (Burgers PDE)</div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+  <!-- STAGE 2 -->
+  <div class="stage">
+    <div class="stage-header">
+      <h3>Stage 2: Hardware Specification Extraction</h3>
+      <div class="ref">Section III.B</div>
+    </div>
+    <div class="stage-body">
+      <div class="grid3">
+        <div class="spec-box">
+          <div class="s-title">Computational Complexity</div>
+          <div class="s-eq">TOPS<sub>req</sub> via throughput analysis</div>
+          <div class="s-sub">Safety margin &#947; = 1.2&#8211;1.5&#215; throughput</div>
+        </div>
+        <div class="spec-box">
+          <div class="s-title">Memory Estimation</div>
+          <div class="s-eq">M<sub>total</sub> = Weights + Activations + State</div>
+          <div class="s-sub">Conservative: &#946; = 2&#215; memory overhead</div>
+        </div>
+        <div class="spec-box">
+          <div class="s-title">Energy / Power</div>
+          <div class="s-eq">P<sub>avg</sub> = P<sub>dyn</sub> + P<sub>static</sub></div>
+          <div class="s-sub">E<sub>inf</sub> = E<sub>compute</sub> + E<sub>memory</sub> + P<sub>static</sub> &#183; T<sub>inf</sub></div>
+        </div>
+      </div>
+      <div class="platform-bar">
+        <div class="pb-title">Platform Recommendation Algorithm</div>
+        <div class="plat-grid">
+          <div class="plat-item">
+            <div class="pi-name pi-green">TinyML (very low throughput)</div>
+            <div class="pi-sub">STM32H7, Nordic nRF52840</div>
+          </div>
+          <div class="plat-item">
+            <div class="pi-name pi-blue">Mid-Range (few TOPS-class NPUs)</div>
+            <div class="pi-sub">TI AM62A, TI TDA4VM</div>
+          </div>
+          <div class="plat-item">
+            <div class="pi-name pi-red">High-Performance (tens of TOPS+)</div>
+            <div class="pi-sub">Jetson Orin Nano, Hailo-8</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+  <!-- STAGE 3 -->
+  <div class="stage">
+    <div class="stage-header">
+      <h3>Stage 3: Solar-Constrained Training &amp; Validation</h3>
+      <div class="ref">Section III.C</div>
+    </div>
+    <div class="stage-body">
+      <div class="solar-banner">
+        <div class="solar-title">Solar Power Availability Model</div>
+        <div class="solar-eq">
+          <i>P</i><sub>solar</sub>(<i>t</i>)&nbsp;=&nbsp;<i>P</i><sub>max</sub>&nbsp;&middot;&nbsp;max<span style="font-size:1.3em;">(</span>0,&nbsp;sin<span style="font-size:1.3em;">(</span><span class="frac"><span class="num">&#960;(<i>t</i>&nbsp;&minus;&nbsp;6)</span><span class="den">12</span></span><span style="font-size:1.3em;">))</span>&nbsp;&middot;&nbsp;<i>W</i>(<i>t</i>)
+        </div>
+        <div class="solar-note">GPU Power (assumed) 250 W &bull; PV intensity 48 gCO&#8322;/kWh &bull; Example target d<sub>cycle</sub> &approx; 50% (with appropriate sizing/calibration)</div>
+      </div>
+      <div class="grid3r">
+        <div class="regime r1">
+          <div class="r-title">Regime 1: Continuous (Grid)</div>
+          <div class="r-items">&bull; Baseline reference<br>&bull; Standard &#969;</div>
+        </div>
+        <div class="regime r2">
+          <div class="r-title">Regime 2: Passive (&#954;&nbsp;=&nbsp;0)</div>
+          <div class="r-items">&bull; Checkpoint only (optimizer state)<br>&bull; Preserves Adam momentum across interruptions</div>
+        </div>
+        <div class="regime r3">
+          <div class="r-title">Regime 3: Active (&#954;&nbsp;&gt;&nbsp;0)</div>
+          <div class="r-items">&bull; Adaptive regularization (&#954;-mechanism)<br>&bull; <strong>Marginal gain, Burgers only: &minus;8.5% to &minus;11.2%</strong> (passive is default)</div>
+        </div>
+      </div>
+      <div class="val-box">
+        <div class="val-title">&#9656; Budget-Sensitivity (C&#8594;B, Table IV)</div>
+        <div class="val-classes">
+          Spans more than two orders of magnitude across seven physics benchmarks (5 of 7 resolved at 95% CI)<br>
+          Burgers &minus;3.2% &middot; Laplace +41.5% &middot; Allen-Cahn +97.6% &middot; Heat +176.8% &middot; Advection +620.0%<br>
+          <em>No clean predictor from PDE class or temporal coupling</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+  <!-- OUTPUT -->
+  <div class="out-card">
+    <div class="oc-title">OUTPUT: Sustainable Deployment Strategy</div>
+    <div class="out-grid">
+      <div class="out-item"><strong>Structured Model:</strong><span class="oi-sub">Physics-consistent, symmetry-preserving</span></div>
+      <div class="out-item"><strong>Optimal Hardware:</strong><span class="oi-sub">Right-sized platform selection</span></div>
+      <div class="out-item"><strong>Verilog-A HDL:</strong><span class="oi-sub">Circuit-ready compact model</span></div>
+      <div class="out-item"><strong>~98% Cost Savings:</strong><span class="oi-sub">$5 MCU vs. $249 Jetson module</span></div>
+      <div class="out-item"><strong>~45&times; Carbon Reduction:</strong><span class="oi-sub">233 kg/device (99.9% hardware-led)</span></div>
+      <div class="out-item"><strong>No Accuracy Penalty:</strong><span class="oi-sub">Structured net ~4&#215; smaller than dense (Burgers)</span></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
