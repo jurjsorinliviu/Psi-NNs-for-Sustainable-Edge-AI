@@ -1,4 +1,4 @@
-# Physics Structure-Informed Neural Networks for Sustainable Edge AI: Constraint-Preserving Models and Training-Budget Sensitivity
+# Physics Structure-Informed Neural Networks for Constraint-Preserving TinyML and Sustainable Edge Deployment
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
