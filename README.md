@@ -7,7 +7,8 @@
 > **Author**: Sorin Liviu Jurj  
 > **Status**: Submitted
 
-![Methodology pipeline](experiments/Methodology%20Pipeline.png)
+<img width="1854" height="3250" alt="figure1_methodology_pipeline" src="https://github.com/user-attachments/assets/18afb438-3255-454b-a49c-deed29f70a1c" />
+
 
 ## 🧪 Deployment and Robustness Experiment Suite (`revision/`)
 
@@ -536,6 +537,7 @@ bit-exact reproducibility across machines.
 
 1. **Ψ-HDL Framework**: [PSI-HDL GitHub](https://github.com/jurjsorinliviu/PSI-HDL)
 2. **Original Ψ-NN**: [Psi-NN GitHub](https://github.com/ZitiLiu/Psi-NN)
+3. **Ψ-xLSTM**: [Psi-xLSTM GitHub](https://github.com/jurjsorinliviu/Psi-xLSTM) ([IEEE Access, 2026](https://doi.org/10.1109/ACCESS.2026.3678809))
 
 ## 🔍 Key Findings Summary
 
@@ -636,6 +638,7 @@ Apache License 2.0 — see [LICENSE](LICENSE) for details.
 
 - Ψ-HDL Framework: [Psi-HDL GitHub](https://github.com/jurjsorinliviu/Psi-HDL)
 - Original Ψ-NN: [Psi-NN GitHub](https://github.com/ZitiLiu/Psi-NN)
+- Ψ-xLSTM: [Psi-xLSTM GitHub](https://github.com/jurjsorinliviu/Psi-xLSTM)
 
 ---
 
