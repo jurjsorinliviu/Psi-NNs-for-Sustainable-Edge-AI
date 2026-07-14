@@ -1,0 +1,250 @@
+{
+  "circuit": "N memristor instances in parallel, each via a 100 ohm series R",
+  "models": {
+    "dense": "[1,16,16,1], 288 weight terms",
+    "structured": "[1,4,4,1], 24 weight terms"
+  },
+  "wall_time": "minimum of 5 runs",
+  "rows": [
+    {
+      "testbench": "dc",
+      "n_devices": 1,
+      "dense": {
+        "wall_s": 0.16554279999991195,
+        "points": 1001,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 0.1632569000003059,
+        "points": 1001,
+        "converged": true
+      },
+      "speedup": 1.0140018584182462,
+      "pct_faster": 1.3808513566323999
+    },
+    {
+      "testbench": "dc",
+      "n_devices": 4,
+      "dense": {
+        "wall_s": 0.16845580000017435,
+        "points": 1001,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 0.16673500000024433,
+        "points": 1001,
+        "converged": true
+      },
+      "speedup": 1.0103205685664527,
+      "pct_faster": 1.0215142487989382
+    },
+    {
+      "testbench": "dc",
+      "n_devices": 16,
+      "dense": {
+        "wall_s": 0.18609680000008666,
+        "points": 1001,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 0.18490329999985988,
+        "points": 1001,
+        "converged": true
+      },
+      "speedup": 1.006454725254918,
+      "pct_faster": 0.6413328978393079
+    },
+    {
+      "testbench": "dc",
+      "n_devices": 64,
+      "dense": {
+        "wall_s": 0.24885249999988446,
+        "points": 1001,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 0.2544814000002589,
+        "points": 1001,
+        "converged": true
+      },
+      "speedup": 0.977880898170284,
+      "pct_faster": -2.2619423153783984
+    },
+    {
+      "testbench": "dc",
+      "n_devices": 256,
+      "dense": {
+        "wall_s": 0.5039401000003636,
+        "points": 1001,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 0.5210431000000426,
+        "points": 1001,
+        "converged": true
+      },
+      "speedup": 0.9671754601496928,
+      "pct_faster": -3.3938557379471637
+    },
+    {
+      "testbench": "pulse",
+      "n_devices": 1,
+      "dense": {
+        "wall_s": 0.506138799999917,
+        "points": 40488,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 0.4885242999998809,
+        "points": 40488,
+        "converged": true
+      },
+      "speedup": 1.036056548261858,
+      "pct_faster": 3.4801718421980197
+    },
+    {
+      "testbench": "pulse",
+      "n_devices": 4,
+      "dense": {
+        "wall_s": 0.6626812000004065,
+        "points": 40488,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 0.6487703999996484,
+        "points": 40488,
+        "converged": true
+      },
+      "speedup": 1.0214417920434806,
+      "pct_faster": 2.099169253745185
+    },
+    {
+      "testbench": "pulse",
+      "n_devices": 16,
+      "dense": {
+        "wall_s": 1.3081113999996887,
+        "points": 40488,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 1.303027700000257,
+        "points": 40488,
+        "converged": true
+      },
+      "speedup": 1.0039014519794405,
+      "pct_faster": 0.38862898063826296
+    },
+    {
+      "testbench": "pulse",
+      "n_devices": 64,
+      "dense": {
+        "wall_s": 3.6195510000002287,
+        "points": 40488,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 3.8252653999998074,
+        "points": 40488,
+        "converged": true
+      },
+      "speedup": 0.9462221889232603,
+      "pct_faster": -5.683423164905419
+    },
+    {
+      "testbench": "pulse",
+      "n_devices": 256,
+      "dense": {
+        "wall_s": 12.349628100000245,
+        "points": 40488,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 12.37387519999993,
+        "points": 40488,
+        "converged": true
+      },
+      "speedup": 0.9980404602755583,
+      "pct_faster": -0.196338705937902
+    },
+    {
+      "testbench": "sine",
+      "n_devices": 1,
+      "dense": {
+        "wall_s": 0.47601069999973333,
+        "points": 40011,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 0.4613510999997743,
+        "points": 40011,
+        "converged": true
+      },
+      "speedup": 1.0317753658763709,
+      "pct_faster": 3.079678671081814
+    },
+    {
+      "testbench": "sine",
+      "n_devices": 4,
+      "dense": {
+        "wall_s": 0.5939399000003505,
+        "points": 40011,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 0.591147699999965,
+        "points": 40011,
+        "converged": true
+      },
+      "speedup": 1.0047233542486687,
+      "pct_faster": 0.47011490562998787
+    },
+    {
+      "testbench": "sine",
+      "n_devices": 16,
+      "dense": {
+        "wall_s": 1.1621516000000156,
+        "points": 40011,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 1.1480797999997776,
+        "points": 40011,
+        "converged": true
+      },
+      "speedup": 1.0122568135074241,
+      "pct_faster": 1.2108403069132987
+    },
+    {
+      "testbench": "sine",
+      "n_devices": 64,
+      "dense": {
+        "wall_s": 3.276006000000052,
+        "points": 40011,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 3.31821809999974,
+        "points": 40011,
+        "converged": true
+      },
+      "speedup": 0.9872786843035751,
+      "pct_faster": -1.2885232810833407
+    },
+    {
+      "testbench": "sine",
+      "n_devices": 256,
+      "dense": {
+        "wall_s": 11.186802100000023,
+        "points": 40011,
+        "converged": true
+      },
+      "structured": {
+        "wall_s": 11.501890900000035,
+        "points": 40011,
+        "converged": true
+      },
+      "speedup": 0.9726054782870518,
+      "pct_faster": -2.8166119073476024
+    }
+  ]
+}

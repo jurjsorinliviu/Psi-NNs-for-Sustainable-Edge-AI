@@ -1,0 +1,332 @@
+{
+  "protocol": {
+    "seeds": [
+      7270,
+      860,
+      5390,
+      5191,
+      5734,
+      6265,
+      466,
+      4426,
+      5578,
+      8322
+    ],
+    "C_steps": 3000,
+    "B_steps": 1500,
+    "reg_mult": 3,
+    "device": "cuda"
+  },
+  "new_problems": {
+    "poisson": {
+      "C_test_mse": 3.5406690403760874e-05,
+      "B_test_mse": 0.0007907122228061781,
+      "per_seed_C": [
+        3.129128890577704e-05,
+        1.838161188061349e-05,
+        1.5773264749441296e-05,
+        6.0605703765759245e-05,
+        2.3841874281060882e-05,
+        7.332049426622689e-05,
+        4.591075048665516e-05,
+        3.3494889066787437e-05,
+        3.041395939362701e-05,
+        2.103306724166032e-05
+      ],
+      "per_seed_B": [
+        0.0004909149720333517,
+        0.0007384042837657034,
+        0.0009614927694201469,
+        0.0011631811503320932,
+        0.0009512552642263472,
+        0.0004530262085609138,
+        0.0009994086576625705,
+        0.0010854480788111687,
+        0.0004687579639721662,
+        0.0005952328792773187
+      ],
+      "submitted_pct": {
+        "value": 2699.7364917673963,
+        "ci95": [
+          1826.7801594690818,
+          3658.365918082575
+        ]
+      },
+      "log_ratio": {
+        "factor": 23.700775559107857,
+        "factor_ci95": [
+          16.02936391042564,
+          33.90168804617844
+        ],
+        "resolved": true
+      },
+      "descriptors": {
+        "pde_class": "elliptic",
+        "temporal": "none",
+        "nonlinearity": "linear",
+        "order": 2
+      }
+    },
+    "helmholtz": {
+      "C_test_mse": 0.008636067900806666,
+      "B_test_mse": 0.03132541086524725,
+      "per_seed_C": [
+        0.002723293611779809,
+        0.01750730536878109,
+        0.005905299913138151,
+        0.005839910823851824,
+        0.004680657759308815,
+        0.01937229372560978,
+        0.007154031656682491,
+        0.01008718553930521,
+        0.00160873937420547,
+        0.011481961235404015
+      ],
+      "per_seed_B": [
+        0.01906055584549904,
+        0.055577438324689865,
+        0.017314694821834564,
+        0.03429226577281952,
+        0.019260449334979057,
+        0.060043659061193466,
+        0.01664094626903534,
+        0.0568525530397892,
+        0.006942715495824814,
+        0.027268830686807632
+      ],
+      "submitted_pct": {
+        "value": 308.44849281935495,
+        "ci95": [
+          217.79781756067743,
+          407.15479078099014
+        ]
+      },
+      "log_ratio": {
+        "factor": 3.8164801093276095,
+        "factor_ci95": [
+          3.041203121186736,
+          4.79963826388944
+        ],
+        "resolved": true
+      },
+      "descriptors": {
+        "pde_class": "elliptic",
+        "temporal": "none",
+        "nonlinearity": "linear",
+        "order": 2
+      }
+    },
+    "kdv": {
+      "C_test_mse": 2.411080695310375e-05,
+      "B_test_mse": 5.181689484743401e-05,
+      "per_seed_C": [
+        2.1422558347694576e-05,
+        2.3664628315600567e-05,
+        2.7824762582895346e-05,
+        2.2747573893866502e-05,
+        2.7883792427019216e-05,
+        2.64731133938767e-05,
+        2.5575844119885005e-05,
+        2.5276796804973856e-05,
+        1.7682712496025488e-05,
+        2.2556287149200216e-05
+      ],
+      "per_seed_B": [
+        5.01613030792214e-05,
+        5.781409709015861e-05,
+        7.010930858086795e-05,
+        4.5559205318568274e-05,
+        6.460367876570672e-05,
+        5.242268161964603e-05,
+        5.261945989332162e-05,
+        4.882011853624135e-05,
+        3.38738682330586e-05,
+        4.218522735754959e-05
+      ],
+      "submitted_pct": {
+        "value": 113.78858654107762,
+        "ci95": [
+          100.15429681223792,
+          128.39112092588323
+        ]
+      },
+      "log_ratio": {
+        "factor": 2.125904894533714,
+        "factor_ci95": [
+          1.9963610586500318,
+          2.2735696879600718
+        ],
+        "resolved": true
+      },
+      "descriptors": {
+        "pde_class": "dispersive",
+        "temporal": "critical",
+        "nonlinearity": "quadratic",
+        "order": 3
+      }
+    },
+    "klein_gordon": {
+      "C_test_mse": 8.43869208893011e-06,
+      "B_test_mse": 1.1724336513907473e-05,
+      "per_seed_C": [
+        6.537543413287494e-06,
+        2.1361445760703646e-05,
+        4.9201230467588175e-06,
+        2.3107577362679876e-05,
+        6.54782661513309e-06,
+        4.490545052249217e-06,
+        5.983225037198281e-06,
+        6.160360953799682e-06,
+        2.973455593746621e-06,
+        2.304818053744384e-06
+      ],
+      "per_seed_B": [
+        1.0138482139154803e-05,
+        1.4345845556817949e-05,
+        6.582665719179204e-06,
+        2.659339770616498e-05,
+        1.9318540580570698e-05,
+        6.1868813645560294e-06,
+        1.4655925951956306e-05,
+        1.229606095876079e-05,
+        2.36634400607727e-06,
+        4.7592211558367126e-06
+      ],
+      "submitted_pct": {
+        "value": 63.45499501193537,
+        "ci95": [
+          22.259668193659827,
+          107.37289957744439
+        ]
+      },
+      "log_ratio": {
+        "factor": 1.4856285683295567,
+        "factor_ci95": [
+          1.1181152992179635,
+          1.9466000058029216
+        ],
+        "resolved": true
+      },
+      "descriptors": {
+        "pde_class": "hyperbolic",
+        "temporal": "very strong",
+        "nonlinearity": "cubic",
+        "order": 2
+      }
+    }
+  },
+  "pooled": {
+    "burgers": {
+      "factor": 0.97,
+      "resolved": true,
+      "pde_class": "parabolic",
+      "temporal": "moderate",
+      "nonlinearity": "quadratic",
+      "order": 2
+    },
+    "laplace": {
+      "factor": 1.33,
+      "resolved": true,
+      "pde_class": "elliptic",
+      "temporal": "none",
+      "nonlinearity": "linear",
+      "order": 2
+    },
+    "allen_cahn": {
+      "factor": 1.91,
+      "resolved": true,
+      "pde_class": "reaction-diffusion",
+      "temporal": "critical",
+      "nonlinearity": "cubic",
+      "order": 2
+    },
+    "heat": {
+      "factor": 2.3,
+      "resolved": true,
+      "pde_class": "parabolic",
+      "temporal": "strong",
+      "nonlinearity": "linear",
+      "order": 2
+    },
+    "advection": {
+      "factor": 4.45,
+      "resolved": true,
+      "pde_class": "hyperbolic",
+      "temporal": "critical",
+      "nonlinearity": "linear",
+      "order": 1
+    },
+    "wave": {
+      "factor": 2.48,
+      "resolved": false,
+      "pde_class": "hyperbolic",
+      "temporal": "very strong",
+      "nonlinearity": "linear",
+      "order": 2
+    },
+    "memristor": {
+      "factor": 0.55,
+      "resolved": false,
+      "pde_class": "ode",
+      "temporal": "critical",
+      "nonlinearity": "cubic",
+      "order": 1
+    },
+    "poisson": {
+      "factor": 23.700775559107857,
+      "resolved": true,
+      "pde_class": "elliptic",
+      "temporal": "none",
+      "nonlinearity": "linear",
+      "order": 2
+    },
+    "helmholtz": {
+      "factor": 3.8164801093276095,
+      "resolved": true,
+      "pde_class": "elliptic",
+      "temporal": "none",
+      "nonlinearity": "linear",
+      "order": 2
+    },
+    "kdv": {
+      "factor": 2.125904894533714,
+      "resolved": true,
+      "pde_class": "dispersive",
+      "temporal": "critical",
+      "nonlinearity": "quadratic",
+      "order": 3
+    },
+    "klein_gordon": {
+      "factor": 1.4856285683295567,
+      "resolved": true,
+      "pde_class": "hyperbolic",
+      "temporal": "very strong",
+      "nonlinearity": "cubic",
+      "order": 2
+    }
+  },
+  "predictor_tests": {
+    "pde_class": {
+      "p_value": 0.5625,
+      "eta_squared": 0.4480701751837868,
+      "n_groups": 6
+    },
+    "temporal": {
+      "p_value": 0.6305,
+      "eta_squared": 0.29892493297054956,
+      "n_groups": 5
+    },
+    "nonlinearity": {
+      "p_value": 0.1835,
+      "eta_squared": 0.3567854190654398,
+      "n_groups": 3
+    },
+    "order": {
+      "p_value": 0.7424,
+      "eta_squared": 0.042273001872771734,
+      "n_groups": 3
+    }
+  },
+  "test_description": "permutation test on between-group sum of squares of log budget-sensitivity; H0 = the descriptor carries no information about budget sensitivity",
+  "elapsed_s": 1462.8
+}

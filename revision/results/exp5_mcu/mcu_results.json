@@ -1,0 +1,216 @@
+{
+  "host_reference": {
+    "psinn": {
+      "rel_l2_pct": 4.1325764656066895,
+      "antisymmetry": 0.0049471608363091946
+    },
+    "dense": {
+      "rel_l2_pct": 39.42291259765625,
+      "antisymmetry": 0.13018377125263214
+    },
+    "psinn_clustered_distilled": {
+      "rel_l2_pct": 4.114914894104004,
+      "antisymmetry": 0.0033897492103278637,
+      "clusters": 88
+    }
+  },
+  "instr_per_tick": 40,
+  "variants": {
+    "psinn_f32": {
+      "export": {
+        "format": "float32",
+        "weight_bytes": 7620,
+        "clusters": null,
+        "params": 1937,
+        "activation_bytes": 448
+      },
+      "targets": {
+        "nrf52840/O2": {
+          "link": "ok",
+          "flash_bytes": 10788,
+          "ram_bytes": 976,
+          "text": 10776,
+          "data": 12,
+          "bss": 964,
+          "instructions_total": 3274000,
+          "instructions_per_inference": 25578.125,
+          "device_accuracy": {
+            "rel_l2_pct": 4.119473552047643,
+            "antisymmetry": 0.004871587310680601
+          },
+          "derived": {
+            "cycles_est": 31972.65625,
+            "latency_ms": 0.49957275390625006,
+            "energy_uj": 4.987734375,
+            "assumptions": {
+              "cpi": 1.25,
+              "f_mhz": 64,
+              "ua_per_mhz": 52.0,
+              "volt": 3.0
+            }
+          }
+        }
+      }
+    },
+    "psinn_int8": {
+      "export": {
+        "format": "int8",
+        "weight_bytes": 2084,
+        "clusters": null,
+        "params": 1937,
+        "activation_bytes": 448
+      },
+      "targets": {
+        "nrf52840/O2": {
+          "link": "ok",
+          "flash_bytes": 5368,
+          "ram_bytes": 976,
+          "text": 5356,
+          "data": 12,
+          "bss": 964,
+          "instructions_total": 3613240,
+          "instructions_per_inference": 28228.4375,
+          "device_accuracy": {
+            "rel_l2_pct": 4.441973278943473,
+            "antisymmetry": 0.004749734090380613
+          },
+          "derived": {
+            "cycles_est": 35285.546875,
+            "latency_ms": 0.5513366699218749,
+            "energy_uj": 5.5045453124999995,
+            "assumptions": {
+              "cpi": 1.25,
+              "f_mhz": 64,
+              "ua_per_mhz": 52.0,
+              "volt": 3.0
+            }
+          }
+        }
+      }
+    },
+    "psinn_clust_distilled": {
+      "export": {
+        "format": "clustered",
+        "weight_bytes": 2332,
+        "clusters": 70,
+        "params": 1937,
+        "activation_bytes": 448
+      },
+      "targets": {
+        "nrf52840/O2": {
+          "link": "ok",
+          "flash_bytes": 5756,
+          "ram_bytes": 976,
+          "text": 5744,
+          "data": 12,
+          "bss": 964,
+          "instructions_total": 5414520,
+          "instructions_per_inference": 42300.9375,
+          "device_accuracy": {
+            "rel_l2_pct": 4.167333503831556,
+            "antisymmetry": 0.003336512148462982
+          },
+          "derived": {
+            "cycles_est": 52876.171875,
+            "latency_ms": 0.8261901855468751,
+            "energy_uj": 8.2486828125,
+            "assumptions": {
+              "cpi": 1.25,
+              "f_mhz": 64,
+              "ua_per_mhz": 52.0,
+              "volt": 3.0
+            }
+          }
+        }
+      }
+    },
+    "dense_f32": {
+      "export": {
+        "format": "float32",
+        "dims": [
+          2,
+          50,
+          50,
+          50,
+          50,
+          1
+        ],
+        "weight_bytes": 31404,
+        "clusters": null,
+        "params": 7851,
+        "activation_bytes": 400
+      },
+      "targets": {
+        "nrf52840/O2": {
+          "link": "ok",
+          "flash_bytes": 34500,
+          "ram_bytes": 928,
+          "text": 34488,
+          "data": 12,
+          "bss": 916,
+          "instructions_total": 9568360,
+          "instructions_per_inference": 74752.8125,
+          "device_accuracy": {
+            "rel_l2_pct": 42.149610842998236,
+            "antisymmetry": 0.12186773533133792
+          },
+          "derived": {
+            "cycles_est": 93441.015625,
+            "latency_ms": 1.4600158691406249,
+            "energy_uj": 14.576798437499999,
+            "assumptions": {
+              "cpi": 1.25,
+              "f_mhz": 64,
+              "ua_per_mhz": 52.0,
+              "volt": 3.0
+            }
+          }
+        }
+      }
+    },
+    "dense_int8": {
+      "export": {
+        "format": "int8",
+        "dims": [
+          2,
+          50,
+          50,
+          50,
+          50,
+          1
+        ],
+        "weight_bytes": 8474,
+        "clusters": null,
+        "params": 7851,
+        "activation_bytes": 400
+      },
+      "targets": {
+        "nrf52840/O2": {
+          "link": "ok",
+          "flash_bytes": 11672,
+          "ram_bytes": 928,
+          "text": 11660,
+          "data": 12,
+          "bss": 916,
+          "instructions_total": 10587800,
+          "instructions_per_inference": 82717.1875,
+          "device_accuracy": {
+            "rel_l2_pct": 44.01406204248899,
+            "antisymmetry": 0.261354138114662
+          },
+          "derived": {
+            "cycles_est": 103396.484375,
+            "latency_ms": 1.615570068359375,
+            "energy_uj": 16.1298515625,
+            "assumptions": {
+              "cpi": 1.25,
+              "f_mhz": 64,
+              "ua_per_mhz": 52.0,
+              "volt": 3.0
+            }
+          }
+        }
+      }
+    }
+  }
+}

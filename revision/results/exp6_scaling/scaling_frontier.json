@@ -1,0 +1,245 @@
+{
+  "target": "nRF52840 (Cortex-M4F, 1024 KB flash / 256 KB RAM)",
+  "opt": "O2",
+  "seed": 0,
+  "epochs": 3000,
+  "throughput_workload": {
+    "grid": "128x128",
+    "rate_hz": 100,
+    "inferences_per_s": 1638400,
+    "nrf52840_tops": 0.026
+  },
+  "note": "fit is decided by the linker against the real memory map; required TOPS uses MEASURED instructions per inference, not the architectural operation count",
+  "rows": [
+    {
+      "node_num": 16,
+      "structured_params": 1937,
+      "dense_width": 24,
+      "dense_params": 1897,
+      "host": {
+        "structured": {
+          "rel_l2_pct": 4.136655330657959,
+          "antisymmetry": 0.00493216048926115
+        },
+        "dense": {
+          "rel_l2_pct": 41.73909378051758,
+          "antisymmetry": 0.13346649706363678
+        }
+      },
+      "structured": {
+        "fits_nrf52840": true,
+        "flash_bytes": 10752,
+        "ram_bytes": 528,
+        "text": 10740,
+        "data": 12,
+        "bss": 516,
+        "params": 1937,
+        "instructions_per_inference": 25547.8125,
+        "required_tops_at_128x128_100Hz": 0.041857536,
+        "device_accuracy": {
+          "rel_l2_pct": 4.126046248556111,
+          "antisymmetry": 0.004856827209393638
+        }
+      },
+      "dense": {
+        "fits_nrf52840": true,
+        "flash_bytes": 10680,
+        "ram_bytes": 720,
+        "text": 10668,
+        "data": 12,
+        "bss": 708,
+        "params": 1897,
+        "instructions_per_inference": 23148.75,
+        "required_tops_at_128x128_100Hz": 0.037926912,
+        "device_accuracy": {
+          "rel_l2_pct": 44.16458998945603,
+          "antisymmetry": 0.12029946783955374
+        }
+      }
+    },
+    {
+      "node_num": 32,
+      "structured_params": 7457,
+      "dense_width": 48,
+      "dense_params": 7249,
+      "host": {
+        "structured": {
+          "rel_l2_pct": 17.36830711364746,
+          "antisymmetry": 0.020357010886073112
+        },
+        "dense": {
+          "rel_l2_pct": 43.56374740600586,
+          "antisymmetry": 0.41820159554481506
+        }
+      },
+      "structured": {
+        "fits_nrf52840": true,
+        "flash_bytes": 32716,
+        "ram_bytes": 528,
+        "text": 32704,
+        "data": 12,
+        "bss": 516,
+        "params": 7457,
+        "instructions_per_inference": 70924.0625,
+        "required_tops_at_128x128_100Hz": 0.116201984,
+        "device_accuracy": {
+          "rel_l2_pct": 17.836159893037056,
+          "antisymmetry": 0.019804665715065933
+        }
+      },
+      "dense": {
+        "fits_nrf52840": true,
+        "flash_bytes": 32092,
+        "ram_bytes": 912,
+        "text": 32080,
+        "data": 12,
+        "bss": 900,
+        "params": 7249,
+        "instructions_per_inference": 69561.5625,
+        "required_tops_at_128x128_100Hz": 0.113969664,
+        "device_accuracy": {
+          "rel_l2_pct": 47.509844045803725,
+          "antisymmetry": 0.36270288024369535
+        }
+      }
+    },
+    {
+      "node_num": 64,
+      "structured_params": 29249,
+      "dense_width": 97,
+      "dense_params": 28907,
+      "host": {
+        "structured": {
+          "rel_l2_pct": 4.403424263000488,
+          "antisymmetry": 0.0008860680391080678
+        },
+        "dense": {
+          "rel_l2_pct": 64.7764892578125,
+          "antisymmetry": 0.61830073595047
+        }
+      },
+      "structured": {
+        "fits_nrf52840": true,
+        "flash_bytes": 119620,
+        "ram_bytes": 528,
+        "text": 119608,
+        "data": 12,
+        "bss": 516,
+        "params": 29249,
+        "instructions_per_inference": 221150.3125,
+        "required_tops_at_128x128_100Hz": 0.362332672,
+        "device_accuracy": {
+          "rel_l2_pct": 4.3003922563987915,
+          "antisymmetry": 0.0008680835563449858
+        }
+      },
+      "dense": {
+        "fits_nrf52840": true,
+        "flash_bytes": 118720,
+        "ram_bytes": 1304,
+        "text": 118708,
+        "data": 12,
+        "bss": 1292,
+        "params": 28907,
+        "instructions_per_inference": 211964.6875,
+        "required_tops_at_128x128_100Hz": 0.347282944,
+        "device_accuracy": {
+          "rel_l2_pct": 64.34908282473062,
+          "antisymmetry": 0.7255837378214566
+        }
+      }
+    },
+    {
+      "node_num": 96,
+      "structured_params": 65377,
+      "dense_width": 146,
+      "dense_params": 64971,
+      "host": {
+        "structured": {
+          "rel_l2_pct": 10.338860511779785,
+          "antisymmetry": 0.0008128645713441074
+        },
+        "dense": {
+          "rel_l2_pct": 41.03782653808594,
+          "antisymmetry": 0.10968814045190811
+        }
+      },
+      "structured": {
+        "fits_nrf52840": true,
+        "flash_bytes": 263880,
+        "ram_bytes": 528,
+        "text": 263868,
+        "data": 12,
+        "bss": 516,
+        "params": 65377,
+        "instructions_per_inference": 459730.0,
+        "required_tops_at_128x128_100Hz": 0.753221632,
+        "device_accuracy": {
+          "rel_l2_pct": 10.281149753229576,
+          "antisymmetry": 0.0007967424672540144
+        }
+      },
+      "dense": {
+        "fits_nrf52840": true,
+        "flash_bytes": 262976,
+        "ram_bytes": 1696,
+        "text": 262964,
+        "data": 12,
+        "bss": 1684,
+        "params": 64971,
+        "instructions_per_inference": 444276.5625,
+        "required_tops_at_128x128_100Hz": 0.72790272,
+        "device_accuracy": {
+          "rel_l2_pct": 43.63187852554511,
+          "antisymmetry": 0.09980106726241071
+        }
+      }
+    },
+    {
+      "node_num": 128,
+      "structured_params": 115841,
+      "dense_width": 195,
+      "dense_params": 115441,
+      "host": {
+        "structured": {
+          "rel_l2_pct": 11.187735557556152,
+          "antisymmetry": 0.0013658490497618914
+        },
+        "dense": {
+          "rel_l2_pct": 30.805856704711914,
+          "antisymmetry": 0.17595174908638
+        }
+      },
+      "structured": {
+        "fits_nrf52840": true,
+        "flash_bytes": 465488,
+        "ram_bytes": 528,
+        "text": 465476,
+        "data": 12,
+        "bss": 516,
+        "params": 115841,
+        "instructions_per_inference": 782630.625,
+        "required_tops_at_128x128_100Hz": 1.282262016,
+        "device_accuracy": {
+          "rel_l2_pct": 11.871086714927724,
+          "antisymmetry": 0.0013422472581497038
+        }
+      },
+      "dense": {
+        "fits_nrf52840": true,
+        "flash_bytes": 464856,
+        "ram_bytes": 2088,
+        "text": 464844,
+        "data": 12,
+        "bss": 2076,
+        "params": 115441,
+        "instructions_per_inference": 767075.625,
+        "required_tops_at_128x128_100Hz": 1.256776704,
+        "device_accuracy": {
+          "rel_l2_pct": 37.808589186158706,
+          "antisymmetry": 0.21603765340095096
+        }
+      }
+    }
+  ]
+}
