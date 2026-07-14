@@ -5,12 +5,15 @@ Caption (P[505]):
   C = 3ω/full-budget (continuous)
   B = 3ω/half-budget (continuous)
   A = 1ω/half-budget (continuous)
-  E = active SolarConstrainedTrainer regime (≡ B by structural identity)
+  E = active solar regime (≡ B ONLY under lossless checkpointing with no rollback)
 
 Contrasts:
   D→C : pure regularization (1ω→3ω at full budget)
   C→B : pure budget (full→half at 3ω)
-  B→E : mechanism (continuous→active at 3ω/half-budget; =0 by construction)
+  B→E : the interruption mechanism. It is 0 under the lossless/no-rollback assumption --
+        a NULL MODEL, not an empirical finding. exp3 breaks that assumption (stochastic
+        timing, rolled-back work, degraded checkpoints) and measures B→E ≠ 0: e.g. losing
+        Adam's moments on resume costs +1,984% on Advection at a matched committed budget.
 
 Additive closure: D→C + C→B + B→E = D→E  (residual ≤ 4e-14)
 Cross-validation path: D→A→B
@@ -21,9 +24,9 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
-fig, ax = plt.subplots(figsize=(10, 6.5))
-ax.set_xlim(0, 10)
-ax.set_ylim(0, 7)
+fig, ax = plt.subplots(figsize=(12.4, 8.8))
+ax.set_xlim(0, 12.5)
+ax.set_ylim(-1.8, 7)
 ax.set_aspect('equal')
 ax.axis('off')
 
@@ -42,8 +45,9 @@ nodes = {
           'label': r'$B$', 'sub': '3ω · half budget'},
     'A': {'pos': (6.5, 5.5), 'color': '#f1f5f9', 'edge': '#475569',
           'label': r'$A$', 'sub': '1ω · half budget\n(cross-validation)'},
-    'E': {'pos': (6.5, 0.7), 'color': '#fee2e2', 'edge': '#b91c1c',
-          'label': r'$E$', 'sub': 'Active (SolarConstrained)\n$E \\equiv B$ by construction'},
+    'E': {'pos': (6.5, 0.85), 'color': '#fee2e2', 'edge': '#b91c1c',
+          'label': r'$E$', 'sub': 'Active (solar)\n$E \\equiv B$ only if lossless\nand no rollback',
+          'w': 3.1, 'h': 1.45},
 }
 
 def draw_node(ax, x, y, label, sub, fc, ec, w=2.0, h=1.1):
@@ -57,7 +61,8 @@ def draw_node(ax, x, y, label, sub, fc, ec, w=2.0, h=1.1):
             color='#1e293b', zorder=4)
 
 for n in nodes.values():
-    draw_node(ax, *n['pos'], n['label'], n['sub'], n['color'], n['edge'])
+    draw_node(ax, *n['pos'], n['label'], n['sub'], n['color'], n['edge'],
+              w=n.get('w', 2.0), h=n.get('h', 1.1))
 
 def arrow(ax, p1, p2, color, label, label_offset=(0,0),
           style='-|>', lw=2.2, ls='-', curve=0.0):
@@ -80,8 +85,23 @@ arrow(ax, (2.0, 4.9), (2.0, 3.6), '#1d4ed8',
       r'$D \to C$' + '\npure reg', label_offset=(-0.95, 0))
 arrow(ax, (3.05, 3.0), (5.45, 3.0), '#15803d',
       r'$C \to B$' + '\npure budget', label_offset=(0, 0.55))
-arrow(ax, (6.5, 2.40), (6.5, 1.30), '#b91c1c',
-      r'$B \to E$' + '\nmechanism (=0)', label_offset=(1.55, 0))
+arrow(ax, (6.5, 2.40), (6.5, 1.65), '#b91c1c',
+      r'$B \to E$' + '\nnull model (=0)', label_offset=(1.6, 0))
+
+# The revision breaks the three assumptions that force B->E = 0, and measures what remains.
+ax.text(9.15, 1.75,
+        'Break the null model\n(Sec. 5.10, measured):\n\n'
+        '• stochastic schedule:  0.0%\n'
+        '   → it is the LOSSLESSNESS,\n'
+        '      not the determinism\n'
+        '• Adam state lost:  +1,984%\n'
+        '   (Advection, matched budget)\n'
+        '• INT8 checkpoint:  +139%\n'
+        '• $N_{check}$ > uptime: 92/1500\n'
+        '   steps commit (livelock)',
+        ha='left', va='center', fontsize=9.6, color='#0f172a',
+        bbox=dict(boxstyle='round,pad=0.45', facecolor='#fff7ed',
+                  edgecolor='#b91c1c', linewidth=1.4), zorder=6)
 
 # Cross-validation path D → A → B (dashed)
 arrow(ax, (3.05, 5.5), (5.45, 5.5), '#64748b',
@@ -90,17 +110,18 @@ arrow(ax, (6.5, 4.9), (6.5, 3.6), '#64748b',
       r'$A \to B$', label_offset=(0.75, 0), ls='--', lw=1.5)
 
 # Diagonal: D → E (net effect)
-arrow(ax, (2.6, 4.95), (5.95, 1.15), '#7c3aed',
+arrow(ax, (2.6, 4.95), (5.75, 1.62), '#7c3aed',
       r'$D \to E$' + ' (net)', label_offset=(0.6, -0.4),
       ls='-', lw=1.8, curve=-0.18)
 
 # Additive-closure footer
-ax.text(5.0, -0.3,
+ax.text(5.0, -0.45,
         r'$\bf{D{\to}C + C{\to}B + B{\to}E = D{\to}E}$'
-        '\n(residual ≤ 4×10⁻¹⁴, paired bootstrap n=10, Table VI)',
-        ha='center', va='top', fontsize=10.5, color='#0f172a')
+        '\n(residual ≤ 4×10⁻¹⁴, paired bootstrap n=10)'
+        '\n$B\\to E=0$ follows from the lossless-checkpoint assumption, not from the data.',
+        ha='center', va='top', fontsize=10, color='#0f172a')
 
-ax.set_title('Five-Cell Orthogonal Decomposition Framework',
+ax.set_title('Five-Cell Decomposition and the $B\\to E=0$ Null Model',
              fontsize=13, pad=8, fontweight='bold')
 
 plt.tight_layout()
