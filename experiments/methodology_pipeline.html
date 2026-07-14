@@ -106,7 +106,7 @@ body{font-family:'Times New Roman',Times,serif;background:#fff;padding:32px;}
   <div class="stage">
     <div class="stage-header">
       <h3>Stage 1: &#936;-HDL Pipeline</h3>
-      <div class="ref">Section III.A</div>
+      <div class="ref">Section 3.1</div>
     </div>
     <div class="stage-body">
       <div class="row2">
@@ -141,7 +141,7 @@ body{font-family:'Times New Roman',Times,serif;background:#fff;padding:32px;}
   <div class="stage">
     <div class="stage-header">
       <h3>Stage 2: Hardware Specification Extraction</h3>
-      <div class="ref">Section III.B</div>
+      <div class="ref">Section 3.2</div>
     </div>
     <div class="stage-body">
       <div class="grid3">
@@ -152,8 +152,8 @@ body{font-family:'Times New Roman',Times,serif;background:#fff;padding:32px;}
         </div>
         <div class="spec-box">
           <div class="s-title">Memory Estimation</div>
-          <div class="s-eq">M<sub>total</sub> = Weights + Activations + State</div>
-          <div class="s-sub">Conservative: &#946; = 2&#215; memory overhead</div>
+          <div class="s-eq">M<sub>w</sub> = &#931;K<sub>&#8467;</sub>&#183;S<sub>param</sub> + N&#183;S<sub>idx</sub></div>
+          <div class="s-sub">Relation matrix <strong>R</strong> costs 1 byte/param &#8658; compression bounded near 4&#215;</div>
         </div>
         <div class="spec-box">
           <div class="s-title">Energy / Power</div>
@@ -177,6 +177,11 @@ body{font-family:'Times New Roman',Times,serif;background:#fff;padding:32px;}
             <div class="pi-sub">Jetson Orin Nano, Hailo-8</div>
           </div>
         </div>
+        <div style="margin-top:8px;text-align:center;font-family:Arial,sans-serif;font-size:.72rem;color:#64748b;">
+          Filters are non-binding on the smallest models (all platforms clear them). Using
+          <strong>measured</strong> instruction counts, compute binds from node_num=32
+          (0.116 TOPS &gt; STM32H7&rsquo;s 0.082) and eliminates the TinyML tier by node_num=64.
+        </div>
       </div>
     </div>
   </div>
@@ -187,7 +192,7 @@ body{font-family:'Times New Roman',Times,serif;background:#fff;padding:32px;}
   <div class="stage">
     <div class="stage-header">
       <h3>Stage 3: Solar-Constrained Training &amp; Validation</h3>
-      <div class="ref">Section III.C</div>
+      <div class="ref">Section 3.3</div>
     </div>
     <div class="stage-body">
       <div class="solar-banner">
@@ -204,7 +209,7 @@ body{font-family:'Times New Roman',Times,serif;background:#fff;padding:32px;}
         </div>
         <div class="regime r2">
           <div class="r-title">Regime 2: Passive (&#954;&nbsp;=&nbsp;0)</div>
-          <div class="r-items">&bull; Checkpoint only (optimizer state)<br>&bull; Preserves Adam momentum across interruptions</div>
+          <div class="r-items">&bull; Lossless checkpoint &#8658; B&#8801;E, so schedule is inert (null model)<br>&bull; <strong>Break it and B&#8594;E &#8800; 0:</strong> Adam-state loss costs +1,984% (Advection)</div>
         </div>
         <div class="regime r3">
           <div class="r-title">Regime 3: Active (&#954;&nbsp;&gt;&nbsp;0)</div>
@@ -212,11 +217,12 @@ body{font-family:'Times New Roman',Times,serif;background:#fff;padding:32px;}
         </div>
       </div>
       <div class="val-box">
-        <div class="val-title">&#9656; Budget-Sensitivity (C&#8594;B, Table IV)</div>
+        <div class="val-title">&#9656; Budget-Sensitivity (C&#8594;B): 11 benchmarks, 9 resolved</div>
         <div class="val-classes">
-          Spans more than two orders of magnitude across seven physics benchmarks (5 of 7 resolved at 95% CI)<br>
-          Burgers &minus;3.2% &middot; Laplace +41.5% &middot; Allen-Cahn +97.6% &middot; Heat +176.8% &middot; Advection +620.0%<br>
-          <em>No clean predictor from PDE class or temporal coupling</em>
+          A halved budget multiplies solution error by <strong>0.97&#215; (Burgers) to 23.70&#215; (Poisson)</strong><br>
+          Laplace 1.33&#215; &middot; Klein&ndash;Gordon 1.49&#215; &middot; Allen-Cahn 1.91&#215; &middot; KdV 2.13&#215; &middot; Heat 2.30&#215; &middot; Helmholtz 3.82&#215; &middot; Advection 4.45&#215;<br>
+          <em>No descriptor predicts it (permutation test: PDE class p=0.56, temporal p=0.63, nonlinearity p=0.18, order p=0.74).<br>
+          The three <strong>elliptic</strong> problems alone span 1.33&#215;&ndash;23.70&#215;.</em>
         </div>
       </div>
     </div>
@@ -233,7 +239,7 @@ body{font-family:'Times New Roman',Times,serif;background:#fff;padding:32px;}
       <div class="out-item"><strong>Verilog-A HDL:</strong><span class="oi-sub">Circuit-ready compact model</span></div>
       <div class="out-item"><strong>~98% Cost Savings:</strong><span class="oi-sub">$5 MCU vs. $249 Jetson module</span></div>
       <div class="out-item"><strong>~45&times; Carbon Reduction:</strong><span class="oi-sub">233 kg/device (99.9% hardware-led)</span></div>
-      <div class="out-item"><strong>No Accuracy Penalty:</strong><span class="oi-sub">Structured net ~4&#215; smaller than dense (Burgers)</span></div>
+      <div class="out-item"><strong>Measured on Cortex-M4:</strong><span class="oi-sub">10.8 kB flash, 25.6k instr/inf; symmetry holds on-device (0.005) even under INT8</span></div>
     </div>
   </div>
 
