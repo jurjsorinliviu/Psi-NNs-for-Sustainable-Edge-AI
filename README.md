@@ -9,23 +9,61 @@
 
 ![Methodology pipeline](experiments/Methodology%20Pipeline.png)
 
+## 🧪 Deployment and Robustness Experiment Suite (`revision/`)
+
+Beyond the seven-problem intermittent-training study, the repository contains a second
+experiment suite under [`revision/`](revision/): strong compression baselines (`exp1`),
+ε sensitivity (`exp2`), stochastic-interruption and lossy-checkpoint study (`exp3`),
+clustering with centroid retraining (`exp4`, `distill_cluster.py`), **measured
+Cortex-M4/M7 deployment** (`exp5_mcu/`: C exporter, firmware, linker scripts, QEMU
+harness), scaling frontier (`exp6`), simulator-size sweep (`exp7`), robust estimator
+(`exp8`), solar validation (`exp9`), and **four additional physics benchmarks** taking
+the suite from 7 to 11 with a permutation test of the predictor question (`exp10`,
+`pdes_extra.py`).
+
+Key facts these experiments establish:
+
+- **Memory must count the relation matrix.** A count of cluster centroids is not a
+  measurement of memory: the relation matrix **R** costs 1 index byte per parameter,
+  bounding the weight-memory compression of a clustered fp32 network near **4×**.
+  The 13-cluster figure is a count of *distinct weight values*.
+- **Clustering needs its centroids retrained.** Cluster-and-stop degrades the model at
+  every ε (memristor at ε=0.1: test MSE 2.6e-2 vs 1.3e-6 unclustered); re-optimizing
+  the K centroids with **R** frozen recovers, and can exceed, the unclustered accuracy.
+- **Budget sensitivity spans 0.97×–23.7×.** On a scale-invariant paired log-ratio over
+  the 11-problem suite, a halved training budget multiplies the solution error by
+  between 0.97× and 23.7×, and no descriptor of the equation predicts the cost.
+- **The structured Verilog-A export carries no simulator-side penalty** at any circuit
+  size tested (1–256 devices); single-device wall-clock margins decay with circuit size
+  and vanish by ~64 devices.
+
+**Headline finding:** the three *elliptic* problems, identical under every descriptor
+(elliptic, no time dependence, linear, 2nd order), span **1.33× (Laplace), 3.82×
+(Helmholtz), 23.70× (Poisson)** in budget sensitivity. Poisson, the smoothest problem with
+no dynamics at all, is the **most** budget-sensitive of all eleven. Budget sensitivity
+cannot be read off the equation; it must be measured.
+
+The harness that produces the paper's main tables (`control_arm.py`, `full_sweep.py`,
+`experiments/reproducibility.py`) is included, so the main tables are reproducible from
+a clean clone.
+
 ## 📋 Overview
 
 This repository contains the complete implementation and experimental validation for a framework that couples **physics structure-informed learning** with **renewable-energy constraints** to address three challenges in Edge AI deployment:
 
 1. **Hardware over-specification** — reads quantitative deployment requirements (operations, memory, power) a priori from the structured Psi-NN architecture to inform platform selection before any hardware is committed (a specification methodology; for the small models demonstrated here the platform choice is driven by task size rather than by the structure).
 2. **Carbon footprint** — right-sizing the platform (Jetson Orin Nano → Nordic nRF52840) yields ~45× lifecycle carbon reduction per device; for the demonstrated small models this is driven by task size rather than by the structure, and solar-constrained training contributes under 1% of it.
-3. **Renewable-power feasibility** — characterizes what intermittent training actually does via an orthogonal five-cell decomposition (n=10 seeds, paired bootstrap, 95% CI) across seven physics benchmarks, isolating regularization, budget, and schedule contributions.
+3. **Renewable-power feasibility** — characterizes what intermittent training actually does via an orthogonal five-cell decomposition (n=10 seeds, paired bootstrap, 95% CI) across **eleven** physics benchmarks, isolating regularization, budget, and schedule contributions. The interruption effect itself is *measured* (stochastic timing, work rollback, degraded checkpoints) rather than assumed to be zero (`revision/exp3`).
 
 ### Key Results
 
-| Metric                  | Value                                                                                |
-| ----------------------- | ------------------------------------------------------------------------------------ |
-| **Cost Savings**        | 98.0% ($249 Jetson Orin Nano → $5 Nordic nRF52840)                                          |
-| **Carbon Reduction**    | ~45× per device (238 kg → ~5.35 kg CO₂ over 5-year lifecycle)                       |
-| **Sustainability lever**| ~99.9% from hardware right-sizing; <1% (~0.32 kg) from solar-constrained training    |
-| **Accuracy**            | No penalty for Burgers PDE (test MSE improves under solar training, Table V)         |
-| **Budget sensitivity**  | C→B spans more than two orders of magnitude across seven physics benchmarks (5 of 7 resolved at 95% CI)    |
+| Metric                   | Value                                                        |
+| ------------------------ | ------------------------------------------------------------ |
+| **Cost Savings**         | 98.0% ($249 Jetson Orin Nano → $5 Nordic nRF52840)           |
+| **Carbon Reduction**     | ~45× per device (238 kg → ~5.35 kg CO₂ over 5-year lifecycle) |
+| **Sustainability lever** | ~99.9% from hardware right-sizing; <1% (~0.32 kg) from solar-constrained training |
+| **Accuracy**             | No penalty for Burgers PDE (test MSE improves under solar training, Table V) |
+| **Budget sensitivity**   | A halved budget multiplies solution error by 0.97×–23.7× across **eleven** benchmarks (9 of 11 resolved). **No descriptor of the equation predicts it** (permutation test, all p > 0.18) |
 
 ## 🔁 Reproduce Everything (One Command)
 
@@ -80,11 +118,11 @@ Reads quantitative, a priori hardware requirements from the structured Psi-NN �
 
 ### 2. Orthogonal Five-Cell Decomposition of Intermittent Training
 
-A paired decomposition that isolates the contributions of regularization (D→C), budget (C→B), and the interruption schedule (B→E) to training outcomes under renewable intermittency. Under the deterministic 50% duty cycle and lossless Adam-state checkpointing assumed here, the active regime E reduces *by structural identity* to continuous training at the halved budget B — so the B→E contrast is zero by construction rather than an empirical finding about schedules in general. The two load-bearing empirical contrasts are therefore **regularization (D→C)** and **budget (C→B)**, both measured per problem under D-normalization (additive closure verified to residual ≤ 4×10⁻¹⁴). Probing schedule effects beyond this structural identity would require stochastic interruption timing or lossy checkpoints, both of which are out of scope here.
+A paired decomposition that isolates the contributions of regularization (D→C), budget (C→B), and the interruption schedule (B→E) to training outcomes under renewable intermittency. Under the deterministic 50% duty cycle and lossless Adam-state checkpointing assumed here, the active regime E reduces *by structural identity* to continuous training at the halved budget B — so the B→E contrast is zero by construction rather than an empirical finding about schedules in general. The two load-bearing empirical contrasts are therefore **regularization (D→C)** and **budget (C→B)**, both measured per problem under D-normalization (additive closure verified to residual ≤ 4×10⁻¹⁴). Schedule effects beyond this structural identity (stochastic interruption timing, lossy checkpoints) are measured separately in `revision/exp3`.
 
 ### 3. Budget Sensitivity as the Principal Deployment Risk
 
-The dominant factor in training outcome under solar constraints is **budget sensitivity** — the C→B contrast at matched regularization. It is resolved on five of seven physics benchmarks and spans more than two orders of magnitude (Burgers −3.2% to Advection +620.0%). **No clean predictor emerged across the PDE classes and structural properties tested at n = 7** — this is suggestive but not strong evidence of nonexistence; broader-coverage studies would be needed before this absence could be claimed strongly. Practitioners must therefore measure C→B per problem before committing to renewable-powered training.
+The dominant factor in training outcome under solar constraints is **budget sensitivity** — the C→B contrast at matched regularization. Measured with a scale-invariant paired log-ratio, a halved budget multiplies the solution error by between 0.97× (Burgers) and 23.7× (Poisson) across the eleven-problem suite (9 of 11 resolved). **No descriptor of the equation predicts this cost** (permutation test over PDE class, time dependence, nonlinearity, and derivative order: all p > 0.18). Practitioners must therefore measure C→B per problem before committing to renewable-powered training.
 
 ### 4. Adaptive Regularization (κ-Mechanism)
 
@@ -100,7 +138,7 @@ The Markov solar model has been validated against location-calibrated PVGIS data
 | 10                    | 21.7%           | 36.3%             | +89%             | +60%               | 29 pp           |
 | 15 (target)           | 27.4%           | 39.5%             | +68%             | +56%               | **11.3 pp**     |
 
-**Key Finding** (hedged honestly): the Markov model reproduces training-degradation impact to within **11.3 pp** when panels are sized to approximately 50% duty cycle. Agreement is on degradation impact, not on duty-cycle fidelity — the model overestimates the realized duty cycle (Markov: 39.5% vs. real: 27.4%). This is a model-fidelity comparison (training loss) rather than a performance claim; n=3 seeds, indicative not definitive.
+**Key Finding**: the Markov model reproduces training-degradation impact to within **11.3 pp** when panels are sized to approximately 50% duty cycle. Agreement is on degradation impact, not on duty-cycle fidelity — the model overestimates the realized duty cycle (Markov: 39.5% vs. real: 27.4%). This is a model-fidelity comparison (training loss) rather than a performance claim; n=3 seeds, indicative not definitive.
 
 To run the validation:
 
@@ -362,72 +400,70 @@ print(f"Total Lifecycle:   {carbon['total_kg_co2']:.1f} kg CO₂")
 Test MSE change at the 50% duty cycle (κ=0, passive) relative to continuous
 training at full budget. **Paired bootstrap, n=10 seeds, 95% CI, 10,000 resamples.**
 
-| Problem        | PDE Type                    | Pass-Cont test MSE        | Status      |
-| -------------- | --------------------------- | ------------------------- | ----------- |
-| **Burgers**    | Parabolic (nonlinear)       | **−8.5% [−10.3, −6.6]**   | improves    |
-| Laplace        | Elliptic (steady-state)     | +7.5% [−7, +20]           | unresolved  |
-| Allen-Cahn     | Nonlinear reaction-diffusion| +121.2% [+72, +169]       | resolved    |
-| Heat           | Parabolic                   | +155.9% [+98, +215]       | resolved    |
-| Wave           | Hyperbolic (2nd-order)      | +691.3% [+193, +1462]     | wide CI     |
-| Memristor      | ODE (device physics)        | +768.8% [+419, +1149]     | resolved    |
-| Advection      | Hyperbolic (1st-order)      | +861.5% [+293, +1615]     | resolved    |
+| Problem     | PDE Type                     | Pass-Cont test MSE      | Status     |
+| ----------- | ---------------------------- | ----------------------- | ---------- |
+| **Burgers** | Parabolic (nonlinear)        | **−8.5% [−10.3, −6.6]** | improves   |
+| Laplace     | Elliptic (steady-state)      | +7.5% [−7, +20]         | unresolved |
+| Allen-Cahn  | Nonlinear reaction-diffusion | +121.2% [+72, +169]     | resolved   |
+| Heat        | Parabolic                    | +155.9% [+98, +215]     | resolved   |
+| Wave        | Hyperbolic (2nd-order)       | +691.3% [+193, +1462]   | wide CI    |
+| Memristor   | ODE (device physics)         | +768.8% [+419, +1149]   | resolved   |
+| Advection   | Hyperbolic (1st-order)       | +861.5% [+293, +1615]   | resolved   |
 
 ### Table IV — Budget Sensitivity C→B (C-normalized)
 
 The cost of halving the training budget at matched regularization. **5 of 7 resolved at 95% CI.**
 
-| Problem     | C→B Point Estimate | 95% CI            | Status     |
-| ----------- | ------------------ | ----------------- | ---------- |
-| Burgers     | **−3.2%**          | [−4, −2]          | resolved   |
-| Laplace     | +41.5%             | [+12, +79]        | resolved   |
-| Allen-Cahn  | +97.6%             | [+67, +129]       | resolved   |
-| Heat        | +176.8%            | [+85, +305]       | resolved   |
-| Memristor   | +306.4%            | [−69, +714]       | unresolved |
-| Advection   | **+620.0%**        | [+239, +1118]     | resolved   |
-| Wave        | +3474%             | [+30, +9677]      | wide CI    |
+| Problem    | C→B Point Estimate | 95% CI        | Status     |
+| ---------- | ------------------ | ------------- | ---------- |
+| Burgers    | **−3.2%**          | [−4, −2]      | resolved   |
+| Laplace    | +41.5%             | [+12, +79]    | resolved   |
+| Allen-Cahn | +97.6%             | [+67, +129]   | resolved   |
+| Heat       | +176.8%            | [+85, +305]   | resolved   |
+| Memristor  | +306.4%            | [−69, +714]   | unresolved |
+| Advection  | **+620.0%**        | [+239, +1118] | resolved   |
+| Wave       | +3474%             | [+30, +9677]  | wide CI    |
 
-**Key Finding**: C→B spans more than two orders of magnitude. **No clean predictor emerged
-across the PDE classes and structural properties tested at n = 7** (suggestive but
-not strong evidence of nonexistence) — parabolic Heat (+176.8%) is the
-second-most sensitive problem, exceeded only by transport-dominated Advection
-(+620.0%); a parabolic diffusion problem outranking everything but first-order
-hyperbolic transport is direct evidence that PDE class does not predict
-sensitivity, while Laplace and Burgers stay low-sensitivity. The Memristor's sign reversal
-between C-normalization (+306.4%) and D-normalization (−767%) suggests the
-estimator is at its lower n-bound for that problem, a further reason to treat the
-absence of a predictor as suggestive rather than established. C→B must be measured
-per problem.
+**Key Finding**: on the scale-invariant paired log-ratio over the full eleven-problem
+suite, a halved budget multiplies solution error by **0.97×–23.7×** (the table above
+reports the C-normalized percentage contrasts for the original seven problems).
+**No descriptor of the equation predicts this cost** (permutation test: all p > 0.18) —
+parabolic Heat (+176.8%) is exceeded only by transport-dominated Advection (+620.0%)
+among the seven, while on the extended suite the three elliptic problems alone span
+1.33×–23.7×. The Memristor's sign reversal between C-normalization (+306.4%) and
+D-normalization (−767%) indicates the estimator is at its lower n-bound for that
+problem. C→B must be measured per problem.
 
 ### Figure 3 — Burgers PDE κ-Sweep (Weak-Monotone Improvement)
 
 The κ-mechanism produces a weak-monotone improvement curve relative to the
 continuous baseline. **All five points individually resolved at 95% CI.**
 
-| κ Value | test MSE Change vs. Continuous | 95% CI            |
-| ------- | ------------------------------ | ----------------- |
-| 0.0     | −8.5%                          | [−10.3, −6.6]     |
-| 0.5     | −9.1%                          | [−10.9, −7.3]     |
-| 1.0     | −9.7%                          | [−11.9, −7.5]     |
-| 1.5     | −10.3%                         | [−12.3, −8.4]     |
-| 2.0     | **−11.2%**                     | [−13.5, −9.0]     |
+| κ Value | test MSE Change vs. Continuous | 95% CI        |
+| ------- | ------------------------------ | ------------- |
+| 0.0     | −8.5%                          | [−10.3, −6.6] |
+| 0.5     | −9.1%                          | [−10.9, −7.3] |
+| 1.0     | −9.7%                          | [−11.9, −7.5] |
+| 1.5     | −10.3%                         | [−12.3, −8.4] |
+| 2.0     | **−11.2%**                     | [−13.5, −9.0] |
 
 Endpoint span (κ=0 to κ=2): **−2.7% [−3.3, −2.2]** — also resolved.
 Cross-validation against independent passive-to-active comparison: agrees at 0.00 pp.
 
 ### Platform Recommendation Example (Burgers PDE)
 
-| Platform        | TOPS  | Cost  | Power  | Utilization | Fit            | Score  |
-| --------------- | ----- | ----- | ------ | ----------- | -------------- | ------ |
-| STM32H7         | 0.082 | $8    | 400 mW | 0.027%      | Over-specified | 214    |
+| Platform            | TOPS  | Cost  | Power  | Utilization | Fit                           | Score  |
+| ------------------- | ----- | ----- | ------ | ----------- | ----------------------------- | ------ |
+| STM32H7             | 0.082 | $8    | 400 mW | 0.027%      | Over-specified                | 214    |
 | **Nordic nRF52840** | 0.026 | $5.00 | 15 mW  | 0.085%      | **Over-specified (selected)** | 252    |
-| TI AM62A        | 2.0   | $35   | 2 W    | <0.001%     | Over-specified | 17,500 |
+| TI AM62A            | 2.0   | $35   | 2 W    | <0.001%     | Over-specified                | 17,500 |
 
 ### Carbon Footprint Comparison (5-year lifecycle, per device)
 
-| Scenario              | Training | Deployment | Total       | Reduction   |
-| --------------------- | -------- | ---------- | ----------- | ----------- |
-| **Solar + Nordic nRF52840** | 0.036 kg | 0.31 kg | **~5.35 kg** | **~45× less** |
-| Grid + Jetson Orin    | 0.356 kg | 238 kg     | **238 kg**  | baseline    |
+| Scenario                    | Training | Deployment | Total        | Reduction     |
+| --------------------------- | -------- | ---------- | ------------ | ------------- |
+| **Solar + Nordic nRF52840** | 0.036 kg | 0.31 kg    | **~5.35 kg** | **~45× less** |
+| Grid + Jetson Orin          | 0.356 kg | 238 kg     | **238 kg**   | baseline      |
 
 **Per-device saving: 233 kg CO₂. ~99.9% of this is from the hardware change
 (Jetson → nRF52840); solar-constrained training contributes <1% (~0.32 kg).**
@@ -472,13 +508,13 @@ def paired_bootstrap_ci(num_arr, denom_arr, n_boot=10000, seed=42):
 
 ### Expected Runtime
 
-| Experiment             | Seeds       | Epochs  | Wall Clock (CPU)    |
-| ---------------------- | ----------- | ------- | ------------------- |
-| Single problem         | 1           | 3000    | ~20 minutes         |
-| Statistical validation | 10          | 3000    | ~3.5 hours          |
-| Full 7-problem sweep   | 10 × 7      | 3000    | ~25 hours           |
-| Decomposition (Table VI) | 10 × 4 cells × 7 | 3000 | ~80 hours        |
-| κ-sweep (Figure 3)     | 10 × 5      | 3000    | ~14 hours           |
+| Experiment               | Seeds            | Epochs | Wall Clock (CPU) |
+| ------------------------ | ---------------- | ------ | ---------------- |
+| Single problem           | 1                | 3000   | ~20 minutes      |
+| Statistical validation   | 10               | 3000   | ~3.5 hours       |
+| Full 7-problem sweep     | 10 × 7           | 3000   | ~25 hours        |
+| Decomposition (Table VI) | 10 × 4 cells × 7 | 3000   | ~80 hours        |
+| κ-sweep (Figure 3)       | 10 × 5           | 3000   | ~14 hours        |
 
 **Note**: Solar-constrained training extends wall-clock time by ~2× due to the
 50% duty cycle. All blessed results in the paper are CPU-backend runs to ensure
@@ -489,9 +525,7 @@ bit-exact reproducibility across machines.
 ```bibtex
 @article{jurj2026right_sizing,
   author  = {Sorin Liviu Jurj},
-  title   = {Physics Structure-Informed Neural Networks for
-             Sustainable Edge AI: Constraint-Preserving Models
-             and Training-Budget Sensitivity},
+  title   = {Physics Structure-Informed Neural Networks for Constraint-Preserving TinyML and Sustainable Edge Deployment},
   journal = {Under Review},
   year    = {2026},
   url     = {https://github.com/jurjsorinliviu/Psi-NNs-for-Sustainable-Edge-AI}
@@ -510,7 +544,7 @@ bit-exact reproducibility across machines.
 1. **Hardware right-sizing is the dominant sustainability lever** — of the 233 kg
    per-device carbon saving, ~99.9% comes from the Jetson → Nordic nRF52840 platform
    change (task-size-driven for the demonstrated models); <1% comes from solar-constrained
-   training. The headline "solar makes AI greener" framing is corrected.
+   training.
 
 2. **For Burgers PDE, solar-constrained training has no accuracy penalty** —
    test MSE improves under the κ-mechanism relative to the continuous baseline
@@ -520,25 +554,25 @@ bit-exact reproducibility across machines.
    checkpointing, B→E = 0 by structural identity** — the interruption schedule
    reduces by construction to continuous training at the halved budget, not as
    an empirical finding about schedules in general. The load-bearing empirical
-   contrasts are regularization (D→C) and budget (C→B); probing schedule effects
-   beyond this structural identity would require stochastic timing or lossy
-   checkpoints.
+   contrasts are regularization (D→C) and budget (C→B). `revision/exp3` measures
+   the schedule effects beyond this identity: a stochastic outage pattern changes
+   the outcome by exactly zero under lossless checkpointing, while discarding the
+   optimizer state on resume costs up to +1,984% (Advection).
 
 ### ⚠️ What's a deployment risk
 
-4. **Budget sensitivity (C→B) spans more than two orders of magnitude.**
-   Burgers (−3.2%), Laplace (+41.5%), Allen-Cahn (+97.6%), Heat (+176.8%),
-   Advection (+620.0%) — 5 of 7 problems resolved; Wave and Memristor have wide
-   or unresolved CIs. **No clean predictor emerged across the PDE classes and
-   structural properties tested at n = 7** — this is suggestive but not strong
-   evidence of nonexistence at the present sample size.
-   **Practitioners must measure C→B per problem before committing to renewable-
-   powered training.**
+4. **Budget sensitivity (C→B) spans 0.97×–23.7× in solution error** across the
+   eleven-problem suite (9 of 11 resolved on the scale-invariant paired
+   log-ratio). **No descriptor of the equation predicts this cost** (permutation
+   test over PDE class, time dependence, nonlinearity, and derivative order:
+   all p > 0.18); the three elliptic problems alone span 1.33× (Laplace) to
+   23.7× (Poisson). **Practitioners must measure C→B per problem before
+   committing to renewable-powered training.**
 
-5. **Wave and Memristor** are the two unresolved cases: Wave's C→B point estimate
-   is very high (+3474%) but its CI is so wide that the contrast is effectively
-   uninterpretable; Memristor's CI crosses zero. Both are excluded from the
-   resolved-5-of-7 framing for cause.
+5. **Wave and Memristor** are the two unresolved cases even under the robust
+   estimator: Wave's C→B point estimate is very high (+3474%) but its CI is so
+   wide that the contrast is effectively uninterpretable; Memristor's CI crosses
+   zero. Both are excluded from the resolved-9-of-11 framing for cause.
 
 ### 🔬 Methodology robustness
 
@@ -581,7 +615,7 @@ bit-exact reproducibility across machines.
 
 Areas of interest:
 
-- [ ] Additional elliptic/parabolic problems (Poisson, biharmonic, Helmholtz) to extend low-budget-sensitivity characterization
+- [ ] Additional PDE families (biharmonic, higher-order dispersive, systems of PDEs) to extend the budget-sensitivity map beyond the eleven benchmarks
 - [ ] Extended platform database (Qualcomm, Google Coral, Intel Movidius, RISC-V, neuromorphic)
 - [ ] Multi-physics coupled problems (thermoelasticity, MHD) to test whether physical coupling amplifies budget sensitivity
 - [ ] Real hardware deployment validation with field solar measurements
@@ -605,6 +639,6 @@ Apache License 2.0 — see [LICENSE](LICENSE) for details.
 
 ---
 
-**Last Updated**: June 2026  
+**Last Updated**: July 2026  
 **Paper Status**: Submitted  
 **Code Version**: v1.0
