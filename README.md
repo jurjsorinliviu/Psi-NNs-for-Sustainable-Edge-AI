@@ -10,7 +10,6 @@
 
 
 
-
 ## 🧪 Deployment and Robustness Experiment Suite (`revision/`)
 
 Beyond the seven-problem intermittent-training study, the repository contains a second
