@@ -8,6 +8,7 @@
 > **Status**: Revised manuscript submitted  
 > **Manuscript ID**: make-4470314
 
+<img width="2693" height="4800" alt="fig1_pipeline" src="https://github.com/user-attachments/assets/3703dc81-484e-40a0-9b7a-d068df5b5e57" />
 
 
 ## 🧪 Deployment and Robustness Experiment Suite (`revision/`)
