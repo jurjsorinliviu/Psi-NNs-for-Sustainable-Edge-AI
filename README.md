@@ -1,15 +1,15 @@
-# Constraint-Preserving Physics Structure-Informed Neural Networks for TinyML: Deployment Accounting and Training-Budget Sensitivity
+# Antisymmetry-Preserving Physics Structure-Informed Neural Networks for TinyML: Deployment Accounting and Training-Budget Sensitivity
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/jurjsorinliviu/Psi-NNs-for-Sustainable-Edge-AI)
 
-> **Author**: Sorin Liviu Jurj  
-> **Status**: Revised manuscript submitted  
-> **Manuscript ID**: make-4470314
+> **Author**: Sorin Liviu Jurj 
+> **Status**: Under review 
 
-<img width="2693" height="4800" alt="fig1_pipeline" src="https://github.com/user-attachments/assets/3703dc81-484e-40a0-9b7a-d068df5b5e57" />
+<img width="840" height="1609" alt="fig1_pipeline" src="https://github.com/user-attachments/assets/55149d2d-8208-4924-9146-b0be6c844799" />
 
+> **Constraint-scope note:** The deployment-pipeline preservation result is empirically validated for Burgers odd-in-$x$ antisymmetry. Other physical-constraint types, such as conservation, positivity, monotonicity, or different symmetry groups, are not experimentally validated in this study.
 
 ## 🧪 Deployment and Robustness Experiment Suite (`revision/`)
 
@@ -28,22 +28,22 @@ Key facts these experiments establish:
 
 - **Memory must count the relation matrix.** A count of cluster centroids is not a
   measurement of memory: the relation matrix **R** costs 1 index byte per parameter,
-  bounding the weight-memory compression of a clustered FP32 network near **4×**.
-  The 13-cluster figure is a count of *distinct weight values*.
+   bounding the weight-memory compression of a clustered FP32 network near **4×**.
+   The 13-cluster figure is a count of *distinct weight values*.
 - **Clustering needs its centroids retrained.** Cluster-and-stop degrades the model at
   every ε (memristor at ε=0.1: test MSE 2.6e-2 vs 1.3e-6 unclustered); re-optimizing
-  the K centroids with **R** frozen recovers, and can exceed, the unclustered accuracy.
+   the K centroids with **R** frozen recovers, and can exceed, the unclustered accuracy.
 - **Budget sensitivity spans 0.97×–23.7×.** On a scale-invariant paired log-ratio over
   the 11-problem suite, a halved training budget multiplies the solution error by
-  between 0.97× and 23.7×. None of the four tested equation descriptors is statistically
-  significant in this exploratory suite.
+   between 0.97× and 23.7×. None of the four tested equation descriptors is statistically
+   significant in this exploratory suite.
 - **The deployment evidence has three levels.** Flash and statically allocated RAM are
   read from the linked firmware binary, instructions and numerical outputs are obtained
-  under deterministic Cortex-M target-ISA emulation, and latency and energy are derived
-  from instruction counts and stated hardware assumptions.
+   under deterministic Cortex-M target-ISA emulation, and latency and energy are derived
+   from instruction counts and stated hardware assumptions.
 - **The structured Verilog-A export carries no simulator-side penalty** at any circuit
   size tested (1–256 devices); single-device wall-clock margins decay with circuit size
-  and vanish by ~64 devices.
+   and vanish by ~64 devices.
 
 **Exploratory finding:** the three *elliptic* problems, identical under the four recorded
 descriptors (elliptic, no time dependence, linear, 2nd order), span **1.33× (Laplace),
@@ -63,15 +63,15 @@ accounting**, and **training-budget sensitivity**. It addresses three questions:
 
 1. **Deployment requirements and platform screening**: estimates operations, memory,
    and power requirements from the model architecture and stored representation. For
-   the evaluated small Burgers models, the candidate-platform constraints are
-   non-binding, and both the dense and structured models fit the nRF52840.
+    the evaluated small Burgers models, the candidate-platform constraints are
+    non-binding, and both the dense and structured models fit the nRF52840.
 2. **Scenario-based carbon accounting**: compares a GPU-class deployment scenario with
    a microcontroller deployment scenario. The estimated reduction is dominated by
-   hardware substitution, not by the structured architecture.
+    hardware substitution, not by the structured architecture.
 3. **Training budget and checkpoint fidelity**: separates reduced effective budget from
    interruption timing. Under complete lossless checkpointing, the schedule has no
-   independent effect; rollback and degraded checkpoint state introduce additional,
-   problem-dependent costs.
+    independent effect; rollback and degraded checkpoint state introduce additional,
+    problem-dependent costs.
 
 ### Key Results
 
@@ -84,6 +84,19 @@ accounting**, and **training-budget sensitivity**. It addresses three questions:
 | **Hardware-substitution carbon scenario** | Up to approximately 45× lower estimated five-year lifecycle carbon (238 kg to approximately 5.35 kg CO₂ per device), with approximately 99.9% of the difference attributed to hardware substitution. |
 | **Budget sensitivity**                    | A halved budget multiplies solution error by 0.97×–23.7× across eleven benchmarks (9 of 11 resolved). None of the four tested descriptors is statistically significant in this exploratory suite. |
 
+### Graphical Result Summaries
+
+The manuscript includes three graphical summaries that complement the numerical tables:
+
+- **Figure 4:** Burgers relative \(L_2\) error versus antisymmetry residual across the
+  structured model, seven evaluated compression baselines, and the dense reference.
+- **Figure 5:** multiplicative budget-sensitivity factors across all eleven benchmark
+  problems, with unresolved cases identified by confidence intervals crossing \(1\times\).
+- **Figure 6:** normalized Cortex-M deployment quantities relative to Dense FP32.
+  Flash and static RAM are linked-binary quantities; instruction count and firmware
+   numerical outputs are obtained under target-ISA emulation. Derived latency and energy
+   are intentionally not included in this summary plot.
+
 ## 🔁 Reproduce Everything (One Command)
 
 ```bash
@@ -95,27 +108,27 @@ in the paper into one self-contained tree:
 
 ```
 paper_artifacts/
-├── tables/    Table I, III, IV, V, VI, the κ-sweep, the binding-compute example,
-│              and the carbon breakdown  (each as .csv AND .tex)
-├── figures/   methodology pipeline, five-cell decomposition, κ-sweep curve
-└── data/      all_derived_numbers.json + MANIFEST.md (artifact → paper element)
+├── tables/ Table I, III, IV, V, VI, the κ-sweep, the binding-compute example,
+│ and the carbon breakdown (each as .csv AND .tex)
+├── figures/ methodology pipeline, five-cell decomposition, κ-sweep, compression, budget, and deployment summaries
+└── data/ all_derived_numbers.json + MANIFEST.md (artifact → paper element)
 ```
 
 - **Default (archived data, ~seconds, deterministic):** every statistic is
   *recomputed* from the blessed per-seed arrays in `results/` using the documented
-  paired bootstrap (mean of per-seed ratios, 10,000 resamples, 95% CI, seed=42);
-  nothing is copied from the manuscript. The scenario-based carbon comparison
-  (238 kg to approximately 5.35 kg, or approximately 45×) is computed from the
-  documented table inputs and equations, so it is auditable rather than asserted.
+   paired bootstrap (mean of per-seed ratios, 10,000 resamples, 95% CI, seed=42);
+   nothing is copied from the manuscript. The scenario-based carbon comparison
+   (238 kg to approximately 5.35 kg, or approximately 45×) is computed from the
+   documented table inputs and equations, so it is auditable rather than asserted.
 - **`--retrain`:** re-runs the canonical Burgers three-regime + κ-sweep end-to-end
   (CPU backend, to match the blessed runs) and rebuilds from the fresh JSONs. The
-  full seven-problem control-arm sweep that produced the archived JSONs is heavy
-  (~25–80 h CPU); the remaining problems are reproduced from their archived per-seed
-  data (see `paper_artifacts/data/MANIFEST.md`).
+   full seven-problem control-arm sweep that produced the archived JSONs is heavy
+   (~25–80 h CPU); the remaining problems are reproduced from their archived per-seed
+   data (see `paper_artifacts/data/MANIFEST.md`).
 
 ```bash
-python reproduce_paper.py --retrain        # regenerate Burgers from scratch
-python reproduce_paper.py --outdir my_dir  # choose output directory
+python reproduce_paper.py --retrain # regenerate Burgers from scratch
+python reproduce_paper.py --outdir my_dir # choose output directory
 ```
 
 > The per-problem scripts under `experiments/` remain available for inspection, but
@@ -124,9 +137,9 @@ python reproduce_paper.py --outdir my_dir  # choose output directory
 
 ## 🎯 Key Contributions
 
-### 1. Constraint Preservation Under the Tested Protocol
+### 1. Burgers Antisymmetry Preservation Under the Tested Protocol
 
-The structured Psi-NN encodes antisymmetry in its connectivity. On the Burgers problem,
+The structured Psi-NN encodes the tested Burgers antisymmetry in its connectivity. On the Burgers problem,
 none of the seven evaluated baselines matches the structured model's joint solution
 accuracy and antisymmetry under the common protocol. This result is specific to the
 tested objectives and does not imply that compression is inferior on every axis.
@@ -201,8 +214,8 @@ not field validation of intermittent renewable training.
 ```bash
 python experiments/pvgis_solar_validation.py --epochs 3000 --seeds 3
 python experiments/pvgis_solar_validation.py --epochs 3000 --seeds 3 \
-  --panel-area 15.0 --peak-power 1500.0 \
-  --output results/pvgis_validation_15m2
+ --panel-area 15.0 --peak-power 1500.0 \
+ --output results/pvgis_validation_15m2
 ```
 
 ### 8. GPU Power Measurement
@@ -229,60 +242,63 @@ python experiments/measure_gpu_power.py --manuscript
 ## 🏗️ Repository Structure
 
 ```
-├── requirements.txt                # Python dependencies
-├── reproduce_paper.py              # ⭐ One-command reproduction (see above)
-├── sustainable_edge_ai.py          # Main implementation
-├── generate_figure2_decomposition.py  # Figure 2 (five-cell decomposition)
-├── generate_figure3_kappa_sweep.py # Figure 3 (Burgers κ-sweep curve)
+├── requirements.txt # Python dependencies
+├── reproduce_paper.py # ⭐ One-command reproduction (see above)
+├── sustainable_edge_ai.py # Main implementation
+├── generate_figure2_decomposition.py # Figure 2, descriptive-condition update
+├── generate_figure3_kappa_sweep.py # Figure 3, κ/context update
+├── generate_figure4_compression_summary.py # Figure 4, compression-baseline summary
+├── generate_figure5_budget_sensitivity.py # Figure 5, eleven-problem budget summary
+├── generate_figure6_mcu_summary.py # Figure 6, Cortex-M deployment summary
 │
-├── experiments/                          # Individual problem experiments
-│   ├── three_regime_burgers_experiment.py
-│   ├── three_regime_laplace_experiment.py
-│   ├── three_regime_heat_experiment.py
-│   ├── three_regime_wave_experiment.py
-│   ├── three_regime_advection_experiment.py
-│   ├── three_regime_allen_cahn_experiment.py
-│   ├── three_regime_memristor_experiment.py
-│   ├── kappa_sweep_experiment.py         # Figure 3 (κ-sweep on Burgers)
-│   ├── duty_cycle_sweep.py
-│   ├── pvgis_solar_validation.py         # PVGIS-calibrated feasibility comparison
-│   ├── measure_gpu_power.py              # GPU power measurement
-│   ├── realistic_solar_validation.py
-│   ├── statistical_validation.py
-│   ├── heat_wave_debug.py                # Hyperparameter debug utility
-│   ├── export_results.py
-│   ├── methodology_pipeline.html         # Figure 1 source (HTML)
-│   └── methodology_pipeline.svg          # Figure 1 vector export
+├── experiments/ # Individual problem experiments
+│ ├── three_regime_burgers_experiment.py
+│ ├── three_regime_laplace_experiment.py
+│ ├── three_regime_heat_experiment.py
+│ ├── three_regime_wave_experiment.py
+│ ├── three_regime_advection_experiment.py
+│ ├── three_regime_allen_cahn_experiment.py
+│ ├── three_regime_memristor_experiment.py
+│ ├── kappa_sweep_experiment.py # Figure 3 (κ-sweep on Burgers)
+│ ├── duty_cycle_sweep.py
+│ ├── pvgis_solar_validation.py # PVGIS-calibrated feasibility comparison
+│ ├── measure_gpu_power.py # GPU power measurement
+│ ├── realistic_solar_validation.py
+│ ├── statistical_validation.py
+│ ├── heat_wave_debug.py # Hyperparameter debug utility
+│ ├── export_results.py
+│ ├── methodology_pipeline.html # Figure 1 source
+│ └── fig1_pipeline.svg # Figure 1 vector export
 │
-├── PSI-HDL-implementation/         # Base Ψ-HDL framework
-│   ├── Code/
-│   │   ├── structure_extractor.py  # Hierarchical clustering
-│   │   ├── verilog_generator.py    # HDL code generation
-│   │   └── vteam_baseline.py       # Memristor baseline
-│   └── Psi-NN-main/                # Original Ψ-NN framework
-│       ├── Module/
-│       │   ├── PsiNN_burgers.py
-│       │   ├── PsiNN_laplace.py
-│       │   ├── PsiNN_poisson.py
-│       │   └── Training.py
-│       └── Config/                 # Experiment configurations
+├── PSI-HDL-implementation/ # Base Ψ-HDL framework
+│ ├── Code/
+│ │ ├── structure_extractor.py # Hierarchical clustering
+│ │ ├── verilog_generator.py # HDL code generation
+│ │ └── vteam_baseline.py # Memristor baseline
+│ └── Psi-NN-main/ # Original Ψ-NN framework
+│ ├── Module/
+│ │ ├── PsiNN_burgers.py
+│ │ ├── PsiNN_laplace.py
+│ │ ├── PsiNN_poisson.py
+│ │ └── Training.py
+│ └── Config/ # Experiment configurations
 │
-└── results/                              # Experimental outputs (CPU backend, blessed)
-    ├── consolidated_sweep/                # 10-seed Pass/Cont/Active test-MSE runs (Table V)
-    ├── control_arm/                       # D, C, B, A cells for Table VI decomposition
-    ├── burgers_kappa_sweep/               # κ ∈ {0, 0.5, 1.0, 1.5, 2.0} for Figure 3
-    ├── pvgis_validation/                  # Markov vs. PVGIS validation (2 m² panel)
-    ├── pvgis_validation_50pct_duty/       # Markov vs. PVGIS (15 m² panel, target duty cycle)
-    ├── pvgis_validation_10m2_panel/       # Markov vs. PVGIS (10 m² panel)
-    ├── gpu_power_measurement/             # Measured RTX 4090 power during PINN training
-    ├── architecture_sensitivity/          # Architecture-width sensitivity (Burgers deep/wide)
-    ├── long_term_convergence/             # 10k-epoch convergence runs (Burgers, Laplace)
-    └── statistical_validation/            # Per-PDE statistical validation outputs
+└── results/ # Experimental outputs (CPU backend, blessed)
+ ├── consolidated_sweep/ # 10-seed Pass/Cont/Active test-MSE runs (Table V)
+ ├── control_arm/ # D, C, B, A cells for Table VI decomposition
+ ├── burgers_kappa_sweep/ # κ ∈ {0, 0.5, 1.0, 1.5, 2.0} for Figure 3
+ ├── pvgis_validation/ # Markov vs. PVGIS validation (2 m² panel)
+ ├── pvgis_validation_50pct_duty/ # Markov vs. PVGIS (15 m² panel, target duty cycle)
+ ├── pvgis_validation_10m2_panel/ # Markov vs. PVGIS (10 m² panel)
+ ├── gpu_power_measurement/ # Measured RTX 4090 power during PINN training
+ ├── architecture_sensitivity/ # Architecture-width sensitivity (Burgers deep/wide)
+ ├── long_term_convergence/ # 10k-epoch convergence runs (Burgers, Laplace)
+ └── statistical_validation/ # Per-PDE statistical validation outputs
 
-paper_artifacts/                           # Generated by reproduce_paper.py (git-ignorable)
-├── tables/                                # Table I/III/IV/V/VI, κ-sweep, carbon (.csv + .tex)
-├── figures/                               # Pipeline, decomposition, κ-sweep
-└── data/                                  # all_derived_numbers.json + MANIFEST.md
+paper_artifacts/ # Generated by reproduce_paper.py (git-ignorable)
+├── tables/ # Table I/III/IV/V/VI, κ-sweep, carbon (.csv + .tex)
+├── figures/ # Figures 1–6: pipeline, decomposition, κ-sweep, compression, budget, deployment
+└── data/ # all_derived_numbers.json + MANIFEST.md
 ```
 
 ## 🚀 Quick Start
@@ -358,15 +374,27 @@ python experiments/pvgis_solar_validation.py --panel-area 15.0 --peak-power 1500
 #### 2. Generate Paper Figures
 
 ```bash
-# Figure 2: Five-cell orthogonal decomposition framework
+# Figure 2: five-cell decomposition with descriptive conditions
 python generate_figure2_decomposition.py
 
-# Figure 3: Burgers PDE κ-sweep improvement curve
+# Figure 3: Burgers κ-sweep with clarified κ and performance direction
 python generate_figure3_kappa_sweep.py
+
+# Figure 4: compression-baseline accuracy and antisymmetry summary
+python generate_figure4_compression_summary.py
+
+# Figure 5: eleven-problem budget-sensitivity summary
+python generate_figure5_budget_sensitivity.py
+
+# Figure 6: normalized Cortex-M deployment summary
+python generate_figure6_mcu_summary.py
 ```
 
-Figure 1 is built from `experiments/methodology_pipeline.html` and exported as the
-tightly cropped vector file `experiments/methodology_pipeline.svg`.
+Figure 1 is built from `experiments/methodology_pipeline.html`
+and exported as `experiments/fig1_pipeline.svg`. The revised Figure 1 preserves the
+original pipeline design while making the input/output flow explicit and showing Stage 2
+(deployment accounting) and Stage 3 (training-budget/checkpoint analysis) as parallel
+analytical tracks rather than a causal chain.
 
 ## 📊 Core Modules
 
@@ -376,17 +404,17 @@ tightly cropped vector file `experiments/methodology_pipeline.svg`.
 from sustainable_edge_ai import SolarConstrainedTrainer
 
 trainer = SolarConstrainedTrainer(model, config={
-    'duty_cycle': 0.5,            # 50% solar availability
-    'active_period': 10,          # 10 steps on
-    'idle_period': 10,            # 10 steps off
-    'checkpoint_frequency': 100,  # Save every 100 steps
-    'kappa': 2.0,                 # κ-mechanism amplification (0.0 = passive)
+ 'duty_cycle': 0.5, # 50% solar availability
+ 'active_period': 10, # 10 steps on
+ 'idle_period': 10, # 10 steps off
+ 'checkpoint_frequency': 100, # Save every 100 steps
+ 'kappa': 2.0, # κ-mechanism amplification (0.0 = passive)
 })
 
 for epoch in range(num_epochs):
-    loss = trainer.train_step(loss_fn=compute_loss, optimizer=optimizer)
-    if trainer.should_checkpoint():
-        trainer.save_checkpoint(f"checkpoint_epoch_{epoch}.pt")
+ loss = trainer.train_step(loss_fn=compute_loss, optimizer=optimizer)
+ if trainer.should_checkpoint():
+ trainer.save_checkpoint(f"checkpoint_epoch_{epoch}.pt")
 ```
 
 ### 2. Hardware Specification Extraction
@@ -399,14 +427,14 @@ struct_extractor = StructureExtractor(model, model_type="PsiNN_burgers")
 hw_extractor = HardwareSpecificationExtractor(model, struct_extractor)
 
 specs = {
-    'operations': hw_extractor.compute_operations(),
-    'tops':       hw_extractor.compute_tops_requirement(target_fps=30.0),
-    'memory_kb':  hw_extractor.compute_memory_requirements() / 1024,
-    'power_mw':   hw_extractor.estimate_power_consumption() * 1000,
+ 'operations': hw_extractor.compute_operations(),
+ 'tops': hw_extractor.compute_tops_requirement(target_fps=30.0),
+ 'memory_kb': hw_extractor.compute_memory_requirements() / 1024,
+ 'power_mw': hw_extractor.estimate_power_consumption() * 1000,
 }
 print(f"TOPS Required: {specs['tops']:.6f}")
-print(f"Memory:        {specs['memory_kb']:.2f} KB")
-print(f"Power:         {specs['power_mw']:.2f} mW")
+print(f"Memory: {specs['memory_kb']:.2f} KB")
+print(f"Power: {specs['power_mw']:.2f} mW")
 ```
 
 ### 3. Platform Screening
@@ -416,14 +444,14 @@ from sustainable_edge_ai import EdgeAIPlatformRecommender
 
 recommender = EdgeAIPlatformRecommender()
 platforms = recommender.recommend_platform(
-    requirements=specs,
-    constraints={'max_cost_usd': 100, 'max_power_mw': 10000},
+ requirements=specs,
+ constraints={'max_cost_usd': 100, 'max_power_mw': 10000},
 )
 for i, platform in enumerate(platforms[:3], 1):
-    print(f"{i}. {platform['name']}: "
-          f"${platform['cost']:.2f}, "
-          f"{platform['utilization']*100:.1f}% utilization, "
-          f"Fit: {platform['fit_category']}")
+ print(f"{i}. {platform['name']}: "
+ f"${platform['cost']:.2f}, "
+ f"{platform['utilization']*100:.1f}% utilization, "
+ f"Fit: {platform['fit_category']}")
 ```
 
 ### 4. Scenario-Based Carbon Accounting
@@ -433,14 +461,14 @@ from sustainable_edge_ai import CarbonFootprintAnalyzer
 
 analyzer = CarbonFootprintAnalyzer()
 carbon = analyzer.compute_lifecycle_carbon(
-    platform=platforms[0],
-    deployment_years=5.0,
-    training_regime='solar',  # vs 'grid'
-    duty_cycle=0.5,
+ platform=platforms[0],
+ deployment_years=5.0,
+ training_regime='solar', # vs 'grid'
+ duty_cycle=0.5,
 )
-print(f"Training Carbon:   {carbon['training_kg_co2']:.3f} kg CO₂")
+print(f"Training Carbon: {carbon['training_kg_co2']:.3f} kg CO₂")
 print(f"Deployment Carbon: {carbon['deployment_kg_co2']:.1f} kg CO₂")
-print(f"Total Lifecycle:   {carbon['total_kg_co2']:.1f} kg CO₂")
+print(f"Total Lifecycle: {carbon['total_kg_co2']:.1f} kg CO₂")
 ```
 
 ## 🔬 Experimental Results
@@ -540,15 +568,15 @@ All performance contrasts use the same paired bootstrap estimator:
 import numpy as np
 
 def paired_bootstrap_ci(num_arr, denom_arr, n_boot=10000, seed=42):
-    """Mean of per-seed ratios, 95% percentile CI (10k resamples)."""
-    num = np.array(num_arr); den = np.array(denom_arr)
-    ratios = (num - den) / den
-    point_est = ratios.mean()
-    rng = np.random.default_rng(seed)
-    idx = rng.integers(0, len(ratios), size=(n_boot, len(ratios)))
-    boot = ratios[idx].mean(axis=1)
-    lo, hi = np.percentile(boot, [2.5, 97.5])
-    return point_est * 100, lo * 100, hi * 100  # return as percentages
+ """Mean of per-seed ratios, 95% percentile CI (10k resamples)."""
+ num = np.array(num_arr); den = np.array(denom_arr)
+ ratios = (num - den) / den
+ point_est = ratios.mean()
+ rng = np.random.default_rng(seed)
+ idx = rng.integers(0, len(ratios), size=(n_boot, len(ratios)))
+ boot = ratios[idx].mean(axis=1)
+ lo, hi = np.percentile(boot, [2.5, 97.5])
+ return point_est * 100, lo * 100, hi * 100 # return as percentages
 ```
 
 ### Normalization choices (per table)
@@ -576,11 +604,11 @@ bit-exact reproducibility across machines.
 
 ```bibtex
 @article{jurj2026right_sizing,
-  author  = {Sorin Liviu Jurj},
-  title   = {Constraint-Preserving Physics Structure-Informed Neural Networks for TinyML: Deployment Accounting and Training-Budget Sensitivity},
-  journal = {Under Review},
-  year    = {2026},
-  url     = {https://github.com/jurjsorinliviu/Psi-NNs-for-Sustainable-Edge-AI}
+ author = {Sorin Liviu Jurj},
+ title = {Antisymmetry-Preserving Physics Structure-Informed Neural Networks for TinyML: Deployment Accounting and Training-Budget Sensitivity},
+ journal = {Under Review},
+ year = {2026},
+ url = {https://github.com/jurjsorinliviu/Psi-NNs-for-Sustainable-Edge-AI}
 }
 ```
 
@@ -596,45 +624,45 @@ bit-exact reproducibility across machines.
 
 1. **Hardware substitution is the dominant driver in the lifecycle scenario.**
    Approximately 99.9% of the estimated 233 kg per-device difference comes from the
-   Jetson-to-nRF52840 hardware change. Both small Burgers models fit the nRF52840, so
-   this difference is not attributed solely to the structured architecture.
+    Jetson-to-nRF52840 hardware change. Both small Burgers models fit the nRF52840, so
+    this difference is not attributed solely to the structured architecture.
 
-2. **The structured model preserves the tested antisymmetry.**
+2. **The structured model preserves the tested Burgers antisymmetry.**
    Under the common Burgers protocol, none of the seven evaluated baselines matches
-   the structured model's joint solution accuracy and antisymmetry. This does not
-   imply that compression is inferior for every objective.
+    the structured model's joint solution accuracy and antisymmetry. This does not
+    imply that compression is inferior for every objective.
 
 3. **The Burgers training result is problem-specific.**
    In the tested Burgers runs, the κ mechanism gives point estimates from −8.5% to
-   −11.2% relative to the continuous baseline. The manuscript does not generalize
-   this behavior to other equations.
+    −11.2% relative to the continuous baseline. The manuscript does not generalize
+    this behavior to other equations.
 
 4. **Under complete lossless checkpointing, schedule timing has no independent effect.**
    In the null model, B→E is zero because the complete optimization trajectory is
-   restored. The central empirical contrasts are regularization (D→C) and budget
-   (C→B). `revision/exp3` evaluates rollback, optimizer-state loss, and degraded
-   checkpoints, which introduce additional, problem-dependent costs.
+    restored. The central empirical contrasts are regularization (D→C) and budget
+    (C→B). `revision/exp3` evaluates rollback, optimizer-state loss, and degraded
+    checkpoints, which introduce additional, problem-dependent costs.
 
 5. **The deployment evidence is partly direct, partly emulated, and partly derived.**
    Flash and statically allocated RAM are obtained from the linked binary.
-   Instructions and numerical outputs are obtained under deterministic target-ISA
-   emulation. Latency and energy are derived rather than measured on physical hardware.
+    Instructions and numerical outputs are obtained under deterministic target-ISA
+    emulation. Latency and energy are derived rather than measured on physical hardware.
 
 ### ⚠️ Deployment boundary conditions
 
 6. **Structure does not automatically shrink a fixed-capacity implementation.**
    At matched parameter count, flash and instruction counts are similar for the dense
-   and structured families. The demonstrated advantage is improved Burgers accuracy
-   and constraint preservation at the evaluated footprint.
+    and structured families. The demonstrated advantage is improved Burgers accuracy
+    and constraint preservation at the evaluated footprint.
 
 7. **Budget sensitivity spans 0.97×–23.7× in the exploratory suite.**
    Nine of eleven cases are resolved under the scale-invariant paired log-ratio.
-   None of the four tested descriptors is statistically significant. This result is
-   suggestive, not definitive, and richer predictors remain open for future study.
+    None of the four tested descriptors is statistically significant. This result is
+    suggestive, not definitive, and richer predictors remain open for future study.
 
 8. **Wave and Memristor remain unresolved under the robust estimator.**
    Wave has a very wide confidence interval, and the Memristor interval crosses zero.
-   Both are excluded from the resolved-nine-of-eleven summary.
+    Both are excluded from the resolved-nine-of-eleven summary.
 
 ### 🔬 Methodological checks
 
@@ -642,7 +670,7 @@ bit-exact reproducibility across machines.
    of at most 4×10⁻¹⁴ where evaluated.
 
 10. The κ=2 endpoint agrees with the independent passive-to-active comparison to
-    0.00 percentage points in the Burgers experiment.
+     0.00 percentage points in the Burgers experiment.
 
 ## 🛠️ Hardware Platforms Database
 
@@ -689,8 +717,8 @@ Areas of interest:
 
 ## 📞 Contact
 
-**Sorin Liviu Jurj**  
-Email: jurjsorinliviu@yahoo.de  
+**Sorin Liviu Jurj** 
+Email: jurjsorinliviu@yahoo.de 
 GitHub: [@jurjsorinliviu](https://github.com/jurjsorinliviu)
 
 ## 📄 License
@@ -705,6 +733,6 @@ Apache License 2.0: see [LICENSE](LICENSE) for details.
 
 ---
 
-**Last Updated**: August 2026  
-**Paper Status**: Submitted  
+**Last Updated**: August 2026 
+**Paper Status**: Under review 
 **Code Version**: v1.0
