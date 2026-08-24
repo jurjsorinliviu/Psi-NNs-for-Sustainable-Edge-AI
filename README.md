@@ -1,4 +1,4 @@
-# Antisymmetry-Preserving Physics Structure-Informed Neural Networks for TinyML: Deployment Accounting and Training-Budget Sensitivity
+# Physics Structure-Informed Neural Networks in the TinyML Pipeline: Antisymmetry Preservation, Deployment Accounting, and Training-Budget Sensitivity
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
@@ -7,19 +7,20 @@
 > **Author**: Sorin Liviu Jurj 
 > **Status**: Under review 
 
-<img width="840" height="1609" alt="fig1_pipeline" src="https://github.com/user-attachments/assets/55149d2d-8208-4924-9146-b0be6c844799" />
+<img width="3440" height="6652" alt="fig1_pipeline" src="https://github.com/user-attachments/assets/21493fac-72d1-4b1e-9b28-ec8309863d30" />
 
-> **Constraint-scope note:** The deployment-pipeline preservation result is empirically validated for Burgers odd-in-$x$ antisymmetry. Other physical-constraint types, such as conservation, positivity, monotonicity, or different symmetry groups, are not experimentally validated in this study.
+
+> **Scope:** The deployment-pipeline preservation result is experimentally established for Burgers odd-in-$x$ antisymmetry. The study does not experimentally test conservation, positivity, monotonicity, or other symmetry classes.
 
 ## 🧪 Deployment and Robustness Experiment Suite (`revision/`)
 
-Beyond the seven-problem intermittent-training study, the repository contains a second
+Beyond the original seven-problem intermittent-training study, the repository includes an extended
 experiment suite under [`revision/`](revision/): strong compression baselines (`exp1`),
 ε sensitivity (`exp2`), stochastic-interruption and lossy-checkpoint study (`exp3`),
 clustering with centroid retraining (`exp4`, `distill_cluster.py`), **linked-binary
 and emulated Cortex-M4/M7 deployment evaluation** (`exp5_mcu/`: C exporter, firmware,
 linker scripts, QEMU harness), scaling frontier (`exp6`), simulator-size sweep (`exp7`),
-robust estimator (`exp8`), solar-schedule feasibility analysis (`exp9`), and **four
+robust estimator (`exp8`), illustrative solar-availability analysis (`exp9`), and **four
 additional physics benchmarks** taking
 the suite from 7 to 11 with a permutation test of the predictor question (`exp10`,
 `pdes_extra.py`).
@@ -36,7 +37,7 @@ Key facts these experiments establish:
 - **Budget sensitivity spans 0.97×–23.7×.** On a scale-invariant paired log-ratio over
   the 11-problem suite, a halved training budget multiplies the solution error by
    between 0.97× and 23.7×. None of the four tested equation descriptors is statistically
-   significant in this exploratory suite.
+   significant in this 11-problem dataset.
 - **The deployment evidence has three levels.** Flash and statically allocated RAM are
   read from the linked firmware binary, instructions and numerical outputs are obtained
    under deterministic Cortex-M target-ISA emulation, and latency and energy are derived
@@ -57,32 +58,29 @@ a clean clone.
 
 ## 📋 Overview
 
-This repository contains the implementation and experimental analysis for a framework
-that studies **architecture-encoded constraint preservation**, **TinyML deployment
-accounting**, and **training-budget sensitivity**. It addresses three questions:
+This repository follows physics structure through the TinyML pipeline. The central
+question is not simply whether a neural surrogate is compact, but which benefits of
+architecture-encoded structure survive compression and deployment, and which hardware,
+training, and lifecycle effects must be measured separately.
 
-1. **Deployment requirements and platform screening**: estimates operations, memory,
-   and power requirements from the model architecture and stored representation. For
-    the evaluated small Burgers models, the candidate-platform constraints are
-    non-binding, and both the dense and structured models fit the nRF52840.
-2. **Scenario-based carbon accounting**: compares a GPU-class deployment scenario with
-   a microcontroller deployment scenario. The estimated reduction is dominated by
-    hardware substitution, not by the structured architecture.
-3. **Training budget and checkpoint fidelity**: separates reduced effective budget from
-   interruption timing. Under complete lossless checkpointing, the schedule has no
-    independent effect; rollback and degraded checkpoint state introduce additional,
-    problem-dependent costs.
+The study connects three technical threads. First, it tests whether Burgers odd-in-$x$
+antisymmetry survives clustering, quantization, compilation, and Cortex-M execution.
+Second, it converts the learned representation into deployable memory, instruction,
+throughput, and power quantities rather than treating parameter or centroid count as
+hardware footprint. Third, it separates interruption timing from effective training
+budget and checkpoint fidelity. Platform screening and lifecycle carbon are then
+evaluated from these quantities under explicit system assumptions.
 
 ### Key Results
 
-| Metric                                    | Value                                                        |
-| ----------------------------------------- | ------------------------------------------------------------ |
-| **Constraint preservation**               | On Burgers, the structured model attains 6.0% relative L2 error and an antisymmetry residual of 0.006. None of the seven evaluated baselines matches both quantities under the common protocol. |
-| **Deployable memory accounting**          | Centroid storage alone is insufficient. With one signed index byte per parameter, clustered FP32 weight-memory reduction is bounded near 4× under the stated assumptions. |
-| **Deployment evidence**                   | Flash and statically allocated RAM come from the linked binary; instructions and numerical outputs come from target-ISA emulation; latency and energy are derived. |
-| **Hardware-substitution cost scenario**   | The compared module price is 98.0% lower ($249 Jetson Orin Nano to $5 Nordic nRF52840). |
-| **Hardware-substitution carbon scenario** | Up to approximately 45× lower estimated five-year lifecycle carbon (238 kg to approximately 5.35 kg CO₂ per device), with approximately 99.9% of the difference attributed to hardware substitution. |
-| **Budget sensitivity**                    | A halved budget multiplies solution error by 0.97×–23.7× across eleven benchmarks (9 of 11 resolved). None of the four tested descriptors is statistically significant in this exploratory suite. |
+| Metric                                          | Value                                                        |
+| ----------------------------------------------- | ------------------------------------------------------------ |
+| **Burgers antisymmetry through deployment**     | The structured model attains 6.0% relative L2 error and an antisymmetry residual of 0.006. None of the seven evaluated baselines matches both quantities under the common protocol. |
+| **Structural value at the evaluated footprint** | The structured model improves Burgers accuracy and antisymmetry, but matched structured and dense models have comparable flash and instruction requirements. Both fit the evaluated nRF52840 target. |
+| **Deployable memory accounting**                | Centroid storage alone is insufficient. With one signed index byte per parameter, clustered FP32 weight-memory reduction is bounded near 4× under the stated assumptions. |
+| **Deployment evidence**                         | Flash and statically allocated RAM come from the linked binary. Instructions and numerical outputs come from target-ISA emulation. Latency and energy are derived. |
+| **Training-budget sensitivity**                 | A halved budget multiplies solution error by 0.97×–23.7× across eleven benchmarks, with 9 of 11 resolved. None of the four tested descriptors is statistically significant in this 11-problem dataset. |
+| **Hardware-substitution carbon scenario**       | The estimated five-year lifecycle comparison is up to approximately 45× lower for the microcontroller scenario, with approximately 99.9% of the difference attributed to hardware substitution rather than model structure. |
 
 ### Graphical Result Summaries
 
@@ -94,8 +92,8 @@ The manuscript includes three graphical summaries that complement the numerical 
   problems, with unresolved cases identified by confidence intervals crossing \(1\times\).
 - **Figure 6:** normalized Cortex-M deployment quantities relative to Dense FP32.
   Flash and static RAM are linked-binary quantities; instruction count and firmware
-   numerical outputs are obtained under target-ISA emulation. Derived latency and energy
-   are intentionally not included in this summary plot.
+  numerical outputs are obtained under target-ISA emulation. Derived latency and energy
+  are intentionally not included in this summary plot.
 
 ## 🔁 Reproduce Everything (One Command)
 
@@ -137,12 +135,14 @@ python reproduce_paper.py --outdir my_dir # choose output directory
 
 ## 🎯 Key Contributions
 
-### 1. Burgers Antisymmetry Preservation Under the Tested Protocol
+### 1. Burgers Antisymmetry Through the TinyML Pipeline
 
-The structured Psi-NN encodes the tested Burgers antisymmetry in its connectivity. On the Burgers problem,
-none of the seven evaluated baselines matches the structured model's joint solution
-accuracy and antisymmetry under the common protocol. This result is specific to the
-tested objectives and does not imply that compression is inferior on every axis.
+The structured Psi-NN encodes Burgers odd-in-$x$ antisymmetry in its architecture. The
+relation remains preserved through the evaluated clustering, quantization, compilation,
+and Cortex-M pipeline. Under the common Burgers protocol, none of the seven evaluated
+baselines matches the structured model's joint solution accuracy and antisymmetry. The
+demonstrated benefit is improved accuracy and physical consistency at the evaluated
+footprint rather than automatic footprint reduction.
 
 ### 2. Centroid Count Is Not Memory Footprint
 
@@ -152,7 +152,7 @@ per parameter, and the stated cluster-count limit, the weight-memory reduction
 approaches but does not exceed approximately 4×. This is a weight-storage result, not
 an automatic bound on total flash or RAM.
 
-### 3. Hardware Requirement Extraction and Platform Screening
+### 3. Deployment Accounting and Platform Screening
 
 The framework estimates computational throughput, memory, and power requirements from
 the model architecture and stored representation:
@@ -195,17 +195,17 @@ the κ sweep (κ ∈ {0, 0.5, 1.0, 1.5, 2.0}, n=10 seeds) gives point estimates 
 Burgers-specific result and is not presented as a general benefit of intermittent
 training.
 
-### 7. Solar-Schedule Feasibility Check
+### 7. Illustrative Solar Availability Check
 
-The Markov availability model is compared with location-calibrated PVGIS data for
-Chemnitz, Germany (50.8°N, n=3 seeds), using downstream training loss as a model-fidelity
-metric:
+The Markov availability model is compared with location-calibrated synthetic irradiance
+for Chemnitz, Germany (50.8°N, n=3 seeds), generated using solar geometry and PVGIS-informed
+weather statistics. Downstream training loss is used as a model-fidelity metric:
 
-| Solar Panel Area (m²) | PVGIS Duty Cycle | Markov Duty Cycle | PVGIS Degradation | Markov Degradation | Difference  |
-| --------------------- | ---------------- | ----------------- | ----------------- | ------------------ | ----------- |
-| 2 (undersized)        | 0.3%             | 12.9%             | +2035%            | +109%              | Diverges    |
-| 10                    | 21.7%            | 36.3%             | +89%              | +60%               | 29 pp       |
-| 15 (target)           | 27.4%            | 39.5%             | +68%              | +56%               | **11.3 pp** |
+| Solar Panel Area (m²) | PVGIS-informed Duty Cycle | Markov Duty Cycle | PVGIS-informed Degradation | Markov Degradation | Difference  |
+| --------------------- | ------------------------- | ----------------- | -------------------------- | ------------------ | ----------- |
+| 2 (undersized)        | 0.3%                      | 12.9%             | +2035%                     | +109%              | Diverges    |
+| 10                    | 21.7%                     | 36.3%             | +89%                       | +60%               | 29 pp       |
+| 15 (target)           | 27.4%                     | 39.5%             | +68%                       | +56%               | **11.3 pp** |
 
 At 15 m², the downstream degradation estimates differ by 11.3 percentage points, while
 the duty cycles remain different. This is an indicative model-fidelity comparison,
@@ -390,15 +390,15 @@ python generate_figure5_budget_sensitivity.py
 python generate_figure6_mcu_summary.py
 ```
 
-Figure 1 is built from `experiments/methodology_pipeline.html`
-and exported as `experiments/fig1_pipeline.svg`. The revised Figure 1 preserves the
-original pipeline design while making the input/output flow explicit and showing Stage 2
-(deployment accounting) and Stage 3 (training-budget/checkpoint analysis) as parallel
-analytical tracks rather than a causal chain.
+Figure 1 is built from `experiments/methodology_pipeline.html` and exported as
+`experiments/fig1_pipeline.svg`. It presents structured-model extraction, deployment
+accounting and platform screening, and controlled training-budget/checkpoint analysis as
+separate analytical tracks. The figure also states that the small Burgers screening
+constraints are non-binding and that the solar availability trace is illustrative.
 
 ## 📊 Core Modules
 
-### 1. Solar-Constrained Training
+### 1. Controlled Intermittent-Power Training
 
 ```python
 from sustainable_edge_ai import SolarConstrainedTrainer
@@ -603,9 +603,9 @@ bit-exact reproducibility across machines.
 ## 🎓 Citation
 
 ```bibtex
-@article{jurj2026right_sizing,
+@article{jurj2026psinn_tinyml,
  author = {Sorin Liviu Jurj},
- title = {Antisymmetry-Preserving Physics Structure-Informed Neural Networks for TinyML: Deployment Accounting and Training-Budget Sensitivity},
+ title = {Physics Structure-Informed Neural Networks in the TinyML Pipeline: Antisymmetry Preservation, Deployment Accounting, and Training-Budget Sensitivity},
  journal = {Under Review},
  year = {2026},
  url = {https://github.com/jurjsorinliviu/Psi-NNs-for-Sustainable-Edge-AI}
@@ -622,55 +622,58 @@ bit-exact reproducibility across machines.
 
 ### ✅ What is established
 
-1. **Hardware substitution is the dominant driver in the lifecycle scenario.**
-   Approximately 99.9% of the estimated 233 kg per-device difference comes from the
-    Jetson-to-nRF52840 hardware change. Both small Burgers models fit the nRF52840, so
-    this difference is not attributed solely to the structured architecture.
+1. **Architecture-encoded Burgers antisymmetry survives the evaluated TinyML pipeline.**
+   Under the common Burgers protocol, the structured model reaches 6.0% relative L2
+   error with an antisymmetry residual of 0.006, and none of the seven evaluated
+   baselines matches both quantities.
 
-2. **The structured model preserves the tested Burgers antisymmetry.**
-   Under the common Burgers protocol, none of the seven evaluated baselines matches
-    the structured model's joint solution accuracy and antisymmetry. This does not
-    imply that compression is inferior for every objective.
+2. **Centroid count is not deployable memory.**
+   The relation or index representation must be stored together with the centroids.
+   Under one signed index byte per parameter, clustered FP32 weight-memory reduction
+   approaches but does not exceed approximately 4× under the stated assumptions.
 
-3. **The Burgers training result is problem-specific.**
-   In the tested Burgers runs, the κ mechanism gives point estimates from −8.5% to
-    −11.2% relative to the continuous baseline. The manuscript does not generalize
-    this behavior to other equations.
-
-4. **Under complete lossless checkpointing, schedule timing has no independent effect.**
-   In the null model, B→E is zero because the complete optimization trajectory is
-    restored. The central empirical contrasts are regularization (D→C) and budget
-    (C→B). `revision/exp3` evaluates rollback, optimizer-state loss, and degraded
-    checkpoints, which introduce additional, problem-dependent costs.
-
-5. **The deployment evidence is partly direct, partly emulated, and partly derived.**
-   Flash and statically allocated RAM are obtained from the linked binary.
-    Instructions and numerical outputs are obtained under deterministic target-ISA
-    emulation. Latency and energy are derived rather than measured on physical hardware.
-
-### ⚠️ Deployment boundary conditions
-
-6. **Structure does not automatically shrink a fixed-capacity implementation.**
+3. **Structure improves the learned solution without automatically shrinking the binary.**
    At matched parameter count, flash and instruction counts are similar for the dense
-    and structured families. The demonstrated advantage is improved Burgers accuracy
-    and constraint preservation at the evaluated footprint.
+   and structured families. Both small Burgers models fit the nRF52840. The demonstrated
+   structural advantage is better Burgers accuracy and antisymmetry at the evaluated
+   footprint.
 
-7. **Budget sensitivity spans 0.97×–23.7× in the exploratory suite.**
-   Nine of eleven cases are resolved under the scale-invariant paired log-ratio.
-    None of the four tested descriptors is statistically significant. This result is
-    suggestive, not definitive, and richer predictors remain open for future study.
+4. **Complete lossless checkpointing removes interruption timing as an independent effect.**
+   In the null model, B→E is zero because the complete optimization trajectory is
+   restored. Reduced training budget, rollback, optimizer-state loss, and degraded
+   checkpoints introduce the effects that matter experimentally.
 
-8. **Wave and Memristor remain unresolved under the robust estimator.**
-   Wave has a very wide confidence interval, and the Memristor interval crosses zero.
-    Both are excluded from the resolved-nine-of-eleven summary.
+5. **The deployment evidence is separated by measurement level.**
+   Flash and statically allocated RAM are obtained from the linked binary. Instructions
+   and numerical outputs are obtained under deterministic target-ISA emulation. Latency
+   and energy are derived rather than measured on physical hardware.
+
+6. **The lifecycle scenario is hardware-substitution driven.**
+   Approximately 99.9% of the estimated 233 kg per-device difference comes from the
+   Jetson-to-nRF52840 hardware change. It is not attributed to model structure alone.
+
+### Scope and interpretation
+
+7. **Budget sensitivity spans 0.97×–23.7× in the eleven-problem dataset.**
+   Nine of eleven cases are resolved under the scale-invariant paired log-ratio. None of
+   the four tested descriptors reaches statistical significance in this dataset. Richer
+   predictors remain an open research question.
+
+8. **The Burgers κ result is problem-specific.**
+   The tested κ mechanism gives point estimates from −8.5% to −11.2% relative to the
+   continuous baseline. This behavior is not generalized to other equations.
+
+9. **Wave and Memristor remain unresolved under the robust estimator.**
+   Wave has a wide confidence interval, and the Memristor interval crosses zero. Both
+   are excluded from the resolved-nine-of-eleven summary.
 
 ### 🔬 Methodological checks
 
-9. The additive decomposition D→C + C→B + B→E = D→E closes to a numerical residual
-   of at most 4×10⁻¹⁴ where evaluated.
+10. The additive decomposition D→C + C→B + B→E = D→E closes to a numerical residual
+    of at most 4×10⁻¹⁴ where evaluated.
 
-10. The κ=2 endpoint agrees with the independent passive-to-active comparison to
-     0.00 percentage points in the Burgers experiment.
+11. The κ=2 endpoint agrees with the independent passive-to-active comparison to
+    0.00 percentage points in the Burgers experiment.
 
 ## 🛠️ Hardware Platforms Database
 
