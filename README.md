@@ -5,7 +5,7 @@
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/jurjsorinliviu/Psi-NNs-for-Sustainable-Edge-AI)
 
 > **Author**: Sorin Liviu Jurj 
-> **Status**: Under review 
+> **Status**: Research paper published in the [Machine Learning and Knowledge Extraction](https://www.mdpi.com/2504-4990/8/9/267) journal. 
 
 <img width="3440" height="6652" alt="fig1_pipeline" src="https://github.com/user-attachments/assets/21493fac-72d1-4b1e-9b28-ec8309863d30" />
 
@@ -604,11 +604,14 @@ bit-exact reproducibility across machines.
 
 ```bibtex
 @article{jurj2026psinn_tinyml,
- author = {Sorin Liviu Jurj},
- title = {Physics Structure-Informed Neural Networks in the TinyML Pipeline: Antisymmetry Preservation, Deployment Accounting, and Training-Budget Sensitivity},
- journal = {Under Review},
- year = {2026},
- url = {https://github.com/jurjsorinliviu/Psi-NNs-for-Sustainable-Edge-AI}
+  author  = {Sorin Liviu Jurj},
+  title   = {Physics Structure-Informed Neural Networks in the TinyML Pipeline: Antisymmetry Preservation, Deployment Accounting, and Training-Budget Sensitivity},
+  journal = {Machine Learning and Knowledge Extraction},
+  year    = {2026},
+  volume  = {8},
+  article-number = {267},
+  doi     = {10.3390/make8090267},
+  url     = {https://doi.org/10.3390/make8090267}
 }
 ```
 
